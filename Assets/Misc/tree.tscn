@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbabnnpp53thk"]
+
+[ext_resource type="Script" uid="uid://bsf3bmmk4t62b" path="res://Scripts/Misc/tree.gd" id="1_88vw5"]
+[ext_resource type="Texture2D" uid="uid://gv0804cpg6pu" path="res://Assets/Tiles/spr_tileset_sunnysideworld_16px.png" id="1_bxoy8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88vw5"]
+atlas = ExtResource("1_bxoy8")
+region = Rect2(823.1227, 99.535, 18.765442, 34.5679)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q8vuj"]
+
+[node name="Tree" type="StaticBody2D" groups=["Trees"]]
+script = ExtResource("1_88vw5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = SubResource("AtlasTexture_88vw5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q8vuj")
+
+[node name="chop_spot" type="Marker2D" parent="."]
+position = Vector2(20, 0)
