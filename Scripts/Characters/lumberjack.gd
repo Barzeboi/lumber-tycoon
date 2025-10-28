@@ -38,7 +38,6 @@ func _process(delta: float) -> void:
 		_find_closest_tree()
 	else:
 		target = closest_tree.chop_spot.global_position
-		character_state = CharacterState.RUN
 	
 func _physics_process(delta: float) -> void:
 	match character_state:
