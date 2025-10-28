@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://eb8ou0sifl71"]
+[gd_scene load_steps=27 format=3 uid="uid://eb8ou0sifl71"]
 
 [ext_resource type="Script" uid="uid://h0nd5nr1v2kl" path="res://Scripts/Characters/lumberjack.gd" id="1_bafrk"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="2_by02f"]
@@ -144,6 +144,73 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="Animation" id="Animation_by02f"]
+resource_name = "IDLE"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("idle_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.069993, 0.1399745, 0.20998994, 0.28, 0.35, 0.42, 0.49, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_s43xq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("idle_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("run_animation:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_v6ntj"]
+resource_name = "RUN"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("run_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833, 0.1667, 0.25, 0.3333, 0.4222, 0.5, 0.5889),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7j7r"]
+_data = {
+&"IDLE": SubResource("Animation_by02f"),
+&"RESET": SubResource("Animation_s43xq"),
+&"RUN": SubResource("Animation_v6ntj")
+}
+
 [node name="Lumberjack" type="CharacterBody2D"]
 script = ExtResource("1_bafrk")
 
@@ -154,6 +221,26 @@ shape = SubResource("CircleShape2D_by02f")
 debug_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_5m43y")
-animation = &"idle"
-frame_progress = 0.21720989
+animation = &"walk"
+
+[node name="ChopTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x7j7r")
+}
+
+[node name="idle_animation" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_by02f")
+hframes = 9
+
+[node name="run_animation" type="Sprite2D" parent="."]
+texture = ExtResource("2_lnp7p")
+hframes = 8
+
+[node name="chop_animation" type="Sprite2D" parent="."]
+
+[connection signal="timeout" from="ChopTimer" to="." method="_on_chop_timer_timeout"]

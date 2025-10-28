@@ -12,7 +12,7 @@ enum TreeState {
 
 @export var state: TreeState = TreeState.GROWN
 @onready var chop_spot: Marker2D = $chop_spot
-
+var health = 4
 
 
 # Called when the node enters the scene tree for the first time.

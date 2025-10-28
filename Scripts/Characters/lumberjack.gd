@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var wait_spot: Marker2D = $"../wait_spot"
 var is_moving: bool = false
 var closest_tree = null
+var higher: bool
+var lower: bool
 
 
 enum CharacterState {
@@ -21,7 +23,6 @@ func _ready() -> void:
 	pass
 	
 func _process(delta: float) -> void:
-	print(character_state)
 	navigation_agent.target_position = target
 	
 	if is_moving == true:
@@ -39,13 +40,20 @@ func _process(delta: float) -> void:
 	else:
 		target = closest_tree.chop_spot.global_position
 	
+	if target.x < self.global_position.x:
+		$AnimatedSprite2D.flip_h = true
+		print("higher")
+	elif target.x > self.global_position.x:
+		$AnimatedSprite2D.flip_h = false
+		print("lower")
+	
 func _physics_process(delta: float) -> void:
 	match character_state:
 		CharacterState.RUN:
 			_move(target,70)
 		CharacterState.IDLE:
 			_move(position, 0)
-	if self.position.distance_to(target) <= 5:
+	if self.position.distance_to(target) <= 1:
 		_reached()
 
 	move_and_slide()
@@ -64,6 +72,8 @@ func _reached():
 	is_moving = false
 	target = position
 	print("reached")
+	if target == closest_tree.position:
+		$ChopTimer.start
 
 func _find_closest_tree():
 	var current_distance = 999999
@@ -75,3 +85,10 @@ func _find_closest_tree():
 				current_distance = tree_distance
 				closest_tree = tree
 	return closest_tree
+	
+func _chop():
+	closest_tree.health -= 1
+
+
+func _on_chop_timer_timeout() -> void:
+	_chop()
