@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var wait_spot: Marker2D = $"../wait_spot"
 var is_moving: bool = false
-var closest_tree
+var closest_tree = null
 
 
 enum CharacterState {
@@ -18,11 +18,10 @@ enum CharacterState {
 @export var character_state: CharacterState = CharacterState.RUN
 
 func _ready() -> void:
-	target = wait_spot.position
-	target_position = navigation_agent.target_position
+	pass
 	
 func _process(delta: float) -> void:
-	print(target)
+	print(character_state)
 	navigation_agent.target_position = target
 	
 	if is_moving == true:
@@ -71,7 +70,7 @@ func _find_closest_tree():
 	var current_distance = 999999
 	closest_tree = null
 	for tree in get_tree().get_nodes_in_group("Trees"):
-		if tree.state == tree.TreeState.CHOPPING or tree.state == tree.TreeState.CHOPPED:
+		if tree.state != tree.TreeState.CHOPPING or tree.state != tree.TreeState.CHOPPED:
 			var tree_distance = self.global_position.distance_to(tree.global_position)
 			if tree_distance < current_distance:
 				current_distance = tree_distance
