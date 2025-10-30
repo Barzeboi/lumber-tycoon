@@ -3,12 +3,13 @@ extends CharacterBody2D
 @export var target: Vector2
 @export var target_position: Vector2
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var wait_spot: Marker2D = $"../wait_spot"
 var is_moving: bool = false
 var closest_tree = null
 var higher: bool
 var lower: bool
-
+var action_performed: bool = false
 
 enum CharacterState {
 	IDLE,
@@ -17,44 +18,55 @@ enum CharacterState {
 	CARRY
 }
 
-@export var character_state: CharacterState = CharacterState.RUN
+@export var character_state: CharacterState = CharacterState.IDLE
 
 func _ready() -> void:
 	pass
 	
 func _process(delta: float) -> void:
+	print(character_state)
+	var trees = get_tree().get_nodes_in_group("Trees")
 	navigation_agent.target_position = target
 	
+	if closest_tree == null and not get_tree().get_nodes_in_group("Trees").is_empty():
+		_find_closest_tree()
+	elif closest_tree != null:
+		target = closest_tree.chop_spot.global_position
+	elif closest_tree == null and get_tree().get_nodes_in_group("Trees") == null:
+		target = wait_spot.position 
+		
 	if is_moving == true:
 		character_state = CharacterState.RUN
-	else:
+	elif is_moving == false and target != closest_tree.chop_spot.global_position:
 		character_state = CharacterState.IDLE
-	match  character_state:
-		CharacterState.RUN:
-			$AnimatedSprite2D.play("walk")
-		CharacterState.IDLE:
-			$AnimatedSprite2D.play("idle")
-			
-	if closest_tree == null:
-		_find_closest_tree()
-	else:
-		target = closest_tree.chop_spot.global_position
+	elif is_moving == false and target == closest_tree.chop_spot.global_position:
+		character_state = CharacterState.CHOP
 	
 	if target.x < self.global_position.x:
-		$AnimatedSprite2D.flip_h = true
-		print("higher")
+		$idle_animation.flip_h = true
+		$run_animation.flip_h = true
+		$chop_animation.flip_h = true
+		$axe_animation.flip_h = true
 	elif target.x > self.global_position.x:
-		$AnimatedSprite2D.flip_h = false
-		print("lower")
+		$idle_animation.flip_h = true
+		$run_animation.flip_h = true
+		$chop_animation.flip_h = true
+		$axe_animation.flip_h = true
+		
+	_character_state()
 	
 func _physics_process(delta: float) -> void:
 	match character_state:
 		CharacterState.RUN:
 			_move(target,70)
 		CharacterState.IDLE:
-			_move(position, 0)
+			_move(target, 0)
+		CharacterState.CHOP:
+			_move(target, 0)
 	if self.position.distance_to(target) <= 1:
 		_reached()
+	else:
+		is_moving = true
 
 	move_and_slide()
 	
@@ -70,25 +82,50 @@ func _move(target, speed):
 # although outwardly redundant, causes the character to behave oddly while trying to stop
 func _reached():
 	is_moving = false
-	target = position
-	print("reached")
-	if target == closest_tree.position:
-		$ChopTimer.start
 
 func _find_closest_tree():
 	var current_distance = 999999
 	closest_tree = null
 	for tree in get_tree().get_nodes_in_group("Trees"):
-		if tree.state != tree.TreeState.CHOPPING or tree.state != tree.TreeState.CHOPPED:
-			var tree_distance = self.global_position.distance_to(tree.global_position)
-			if tree_distance < current_distance:
-				current_distance = tree_distance
-				closest_tree = tree
+		if get_tree().get_nodes_in_group("Trees") != null:
+			if tree.state != tree.TreeState.CHOPPING or tree.state != tree.TreeState.CHOPPED:
+				var tree_distance = self.global_position.distance_to(tree.global_position)
+				if tree_distance < current_distance:
+					current_distance = tree_distance
+					closest_tree = tree
 	return closest_tree
 	
 func _chop():
-	closest_tree.health -= 1
-
+	animation_player.play("CHOP")
+	closest_tree._chop()
+	action_performed = true
+	$ChopTimer.start()
+	print("chop")
+	if animation_player.animation_finished:
+		animation_player.play("IDLE")
 
 func _on_chop_timer_timeout() -> void:
-	_chop()
+	action_performed = false
+	
+func _character_state():
+	match character_state:
+		CharacterState.RUN:
+			$run_animation.visible = true
+			$idle_animation.visible = false
+			$chop_animation.visible = false
+			$axe_animation.visible = false
+			animation_player.play("RUN")
+		CharacterState.IDLE:
+			$idle_animation.visible = true
+			$run_animation.visible = false
+			$chop_animation.visible = false
+			$axe_animation.visible = false
+			animation_player.play("IDLE")
+		CharacterState.CHOP:
+			$idle_animation.visible = false
+			$run_animation.visible = false
+			$chop_animation.visible = true
+			$axe_animation.visible = true
+			if action_performed == false:
+				_chop()
+				animation_player.play("CHOP")

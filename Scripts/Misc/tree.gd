@@ -22,4 +22,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if health == 0:
+		remove_from_group("Trees")
+		queue_free()
+	
+func _chop():
+	health -= 1

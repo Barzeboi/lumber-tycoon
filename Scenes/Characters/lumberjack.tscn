@@ -1,8 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://eb8ou0sifl71"]
+[gd_scene load_steps=30 format=3 uid="uid://eb8ou0sifl71"]
 
 [ext_resource type="Script" uid="uid://h0nd5nr1v2kl" path="res://Scripts/Characters/lumberjack.gd" id="1_bafrk"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="2_by02f"]
 [ext_resource type="Texture2D" uid="uid://1vkcb0tyyr8o" path="res://Assets/Characters/base_walk_strip8.png" id="2_lnp7p"]
+[ext_resource type="Texture2D" uid="uid://du2t5g52wflcx" path="res://Assets/Characters/base_axe_strip10.png" id="4_s43xq"]
+[ext_resource type="Texture2D" uid="uid://dtta76ncf2bw4" path="res://Assets/Characters/tools_axe_strip10.png" id="5_v6ntj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_by02f"]
 radius = 10.049875
@@ -144,6 +146,35 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="Animation" id="Animation_x7j7r"]
+resource_name = "CHOP"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("axe_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("chop_animation:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
 [sub_resource type="Animation" id="Animation_by02f"]
 resource_name = "IDLE"
 length = 0.6
@@ -186,6 +217,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("axe_animation:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("chop_animation:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_v6ntj"]
 resource_name = "RUN"
@@ -206,6 +261,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x7j7r"]
 _data = {
+&"CHOP": SubResource("Animation_x7j7r"),
 &"IDLE": SubResource("Animation_by02f"),
 &"RESET": SubResource("Animation_s43xq"),
 &"RUN": SubResource("Animation_v6ntj")
@@ -226,6 +282,8 @@ sprite_frames = SubResource("SpriteFrames_5m43y")
 animation = &"walk"
 
 [node name="ChopTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -238,9 +296,18 @@ texture = ExtResource("2_by02f")
 hframes = 9
 
 [node name="run_animation" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_lnp7p")
 hframes = 8
 
 [node name="chop_animation" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_s43xq")
+hframes = 10
+
+[node name="axe_animation" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_v6ntj")
+hframes = 10
 
 [connection signal="timeout" from="ChopTimer" to="." method="_on_chop_timer_timeout"]
