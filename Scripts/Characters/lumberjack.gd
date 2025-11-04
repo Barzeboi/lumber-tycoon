@@ -5,11 +5,13 @@ extends CharacterBody2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var wait_spot: Marker2D = $"../wait_spot"
+@onready var trees = get_tree().get_nodes_in_group("Grown_Trees")
 var is_moving: bool = false
 var closest_tree = null
 var higher: bool
 var lower: bool
 var action_performed: bool = false
+
 
 enum CharacterState {
 	IDLE,
@@ -23,24 +25,25 @@ enum CharacterState {
 func _ready() -> void:
 	pass
 	
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
-	print(character_state)
-	var trees = get_tree().get_nodes_in_group("Trees")
 	navigation_agent.target_position = target
+	print(target)
 	
-	if closest_tree == null and not get_tree().get_nodes_in_group("Trees").is_empty():
+	if closest_tree == null and not trees.is_empty():
 		_find_closest_tree()
 	elif closest_tree != null:
-		target = closest_tree.chop_spot.global_position
-	elif closest_tree == null and get_tree().get_nodes_in_group("Trees") == null:
+		target = closest_tree.global_position
+	elif closest_tree == null and trees.is_empty():
 		target = wait_spot.position 
 		
 	if is_moving == true:
 		character_state = CharacterState.RUN
-	elif is_moving == false and target != closest_tree.chop_spot.global_position:
+	elif is_moving == false and target == wait_spot.position:
 		character_state = CharacterState.IDLE
-	elif is_moving == false and target == closest_tree.chop_spot.global_position:
-		character_state = CharacterState.CHOP
+	if closest_tree != null:
+		if is_moving == false and target == closest_tree.global_position:
+			character_state = CharacterState.CHOP
 	
 	if target.x < self.global_position.x:
 		$idle_animation.flip_h = true
@@ -54,7 +57,9 @@ func _process(delta: float) -> void:
 		$axe_animation.flip_h = true
 		
 	_character_state()
+	_tree_state()
 	
+@warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	match character_state:
 		CharacterState.RUN:
@@ -70,6 +75,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
+@warning_ignore("shadowed_variable")
 func _move(target, speed):
 	self.position += self.position.direction_to(navigation_agent.get_next_path_position()) * get_physics_process_delta_time() * speed
 	navigation_agent.target_position = target
@@ -84,19 +90,22 @@ func _reached():
 	is_moving = false
 
 func _find_closest_tree():
+	print("find")
 	var current_distance = 999999
 	closest_tree = null
-	for tree in get_tree().get_nodes_in_group("Trees"):
-		if get_tree().get_nodes_in_group("Trees") != null:
-			if tree.state != tree.TreeState.CHOPPING or tree.state != tree.TreeState.CHOPPED:
-				var tree_distance = self.global_position.distance_to(tree.global_position)
-				if tree_distance < current_distance:
-					current_distance = tree_distance
-					closest_tree = tree
+	for tree in trees:
+		if not trees.is_empty():
+			if tree.state == tree.TreeState.CHOPPING:
+				continue
+			if tree.state == tree.TreeState.CHOPPED:
+				continue
+			var tree_distance = self.global_position.distance_to(tree.global_position)
+			if tree_distance < current_distance:
+				current_distance = tree_distance
+				closest_tree = tree
 	return closest_tree
 	
 func _chop():
-	animation_player.play("CHOP")
 	closest_tree._chop()
 	action_performed = true
 	$ChopTimer.start()
@@ -128,4 +137,9 @@ func _character_state():
 			$axe_animation.visible = true
 			if action_performed == false:
 				_chop()
-				animation_player.play("CHOP")
+			animation_player.play("CHOP")
+
+func _tree_state():
+	match closest_tree.state:
+		closest_tree.TreeState.CHOPPED:
+			closest_tree = null

@@ -21,10 +21,27 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
-	if health == 0:
-		remove_from_group("Trees")
-		queue_free()
+	if health <= 0:
+		state = TreeState.CHOPPED
+	
+	_tree_state()
 	
 func _chop():
 	health -= 1
+
+
+func _tree_state():
+	match state:
+		TreeState.GROWN:
+			add_to_group("Grown_Trees")
+			$GrownSprite.visible = true
+			$ChoppedSprite.visible = false
+		TreeState.CHOPPING:
+			pass
+		TreeState.CHOPPED:
+			remove_from_group("Grown_Trees")
+			add_to_group("Chopped_Trees")
+			$GrownSprite.visible = false
+			$ChoppedSprite.visible = true
