@@ -5,7 +5,6 @@ extends CharacterBody2D
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var wait_spot: Marker2D = $"../wait_spot"
-@onready var trees = get_tree().get_nodes_in_group("Grown_Trees")
 var is_moving: bool = false
 var closest_tree = null
 var higher: bool
@@ -28,13 +27,13 @@ func _ready() -> void:
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	navigation_agent.target_position = target
-	print(target)
+	print()
 	
-	if closest_tree == null and not trees.is_empty():
+	if closest_tree == null and not Global.trees.is_empty():
 		_find_closest_tree()
 	elif closest_tree != null:
 		target = closest_tree.global_position
-	elif closest_tree == null and trees.is_empty():
+	elif closest_tree == null and Global.trees.is_empty():
 		target = wait_spot.position 
 		
 	if is_moving == true:
@@ -51,13 +50,14 @@ func _process(delta: float) -> void:
 		$chop_animation.flip_h = true
 		$axe_animation.flip_h = true
 	elif target.x > self.global_position.x:
-		$idle_animation.flip_h = true
-		$run_animation.flip_h = true
-		$chop_animation.flip_h = true
-		$axe_animation.flip_h = true
+		$idle_animation.flip_h = false
+		$run_animation.flip_h = false
+		$chop_animation.flip_h = false
+		$axe_animation.flip_h = false
 		
 	_character_state()
-	_tree_state()
+	if Global.trees.size() > 0:
+		_tree_state()
 	
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
@@ -84,17 +84,16 @@ func _move(target, speed):
 	else:
 		is_moving = false
 		
-# (10/26/25) Idk why, but removing the "is_moving" line in the "_reached function
+# (10/26/25) Idk why, but removing the "is_moving" line in the "_reached" function
 # although outwardly redundant, causes the character to behave oddly while trying to stop
 func _reached():
 	is_moving = false
 
 func _find_closest_tree():
-	print("find")
 	var current_distance = 999999
 	closest_tree = null
-	for tree in trees:
-		if not trees.is_empty():
+	for tree in Global.trees:
+		if Global.trees.size() > 0:
 			if tree.state == tree.TreeState.CHOPPING:
 				continue
 			if tree.state == tree.TreeState.CHOPPED:
@@ -109,7 +108,6 @@ func _chop():
 	closest_tree._chop()
 	action_performed = true
 	$ChopTimer.start()
-	print("chop")
 	if animation_player.animation_finished:
 		animation_player.play("IDLE")
 

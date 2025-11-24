@@ -13,7 +13,7 @@ region = Rect2(823.1227, 99.535, 18.765442, 34.5679)
 atlas = ExtResource("1_bxoy8")
 region = Rect2(512.0364, 80.35245, 16.123291, 15.911552)
 
-[node name="Tree" type="StaticBody2D" groups=["Grown_Trees"]]
+[node name="Tree" type="StaticBody2D"]
 script = ExtResource("1_88vw5")
 
 [node name="GrownSprite" type="Sprite2D" parent="."]
