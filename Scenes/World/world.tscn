@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://bqu0cfhdbjlgv"]
+[gd_scene load_steps=9 format=4 uid="uid://bqu0cfhdbjlgv"]
 
 [ext_resource type="Texture2D" uid="uid://gv0804cpg6pu" path="res://Assets/Tiles/spr_tileset_sunnysideworld_16px.png" id="1_t1gg8"]
-[ext_resource type="PackedScene" uid="uid://dbabnnpp53thk" path="res://Assets/Misc/tree.tscn" id="2_yp2ti"]
+[ext_resource type="PackedScene" uid="uid://dbabnnpp53thk" path="res://Scenes/Misc/tree.tscn" id="2_yp2ti"]
 [ext_resource type="PackedScene" uid="uid://dr4gwalvmpqp6" path="res://Scenes/Misc/wait_spot.tscn" id="3_3rhlx"]
 [ext_resource type="PackedScene" uid="uid://eb8ou0sifl71" path="res://Scenes/Characters/lumberjack.tscn" id="4_vadfg"]
+[ext_resource type="PackedScene" uid="uid://d153gy5d61ieg" path="res://Scenes/Misc/crate.tscn" id="5_l1hd3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yp2ti"]
 texture = ExtResource("1_t1gg8")
@@ -1787,3 +1788,6 @@ position = Vector2(732, 81)
 
 [node name="Lumberjack" parent="." instance=ExtResource("4_vadfg")]
 position = Vector2(530, 426)
+
+[node name="Crate" parent="." instance=ExtResource("5_l1hd3")]
+position = Vector2(507, 115)

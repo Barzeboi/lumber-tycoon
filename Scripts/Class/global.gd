@@ -1,6 +1,8 @@
 extends Node
 
-@onready var trees = get_tree().get_nodes_in_group("Grown_Trees")
+@onready var grown_trees = get_tree().get_nodes_in_group("Grown_Trees")
+@onready var chopped_trees = get_tree().get_nodes_in_group("Chopped_Trees")
+@onready var crates = get_tree().get_nodes_in_group("Crates")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -8,5 +10,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	trees = get_tree().get_nodes_in_group("Grown_Trees")
-	print(trees.size())
+	grown_trees = get_tree().get_nodes_in_group("Grown_Trees")
+	chopped_trees = get_tree().get_nodes_in_group("Chopped_Trees")
+	crates = get_tree().get_nodes_in_group("Crates")

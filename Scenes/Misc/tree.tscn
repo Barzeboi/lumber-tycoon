@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbabnnpp53thk"]
+[gd_scene load_steps=7 format=3 uid="uid://dbabnnpp53thk"]
 
 [ext_resource type="Script" uid="uid://bsf3bmmk4t62b" path="res://Scripts/Misc/tree.gd" id="1_88vw5"]
 [ext_resource type="Texture2D" uid="uid://gv0804cpg6pu" path="res://Assets/Tiles/spr_tileset_sunnysideworld_16px.png" id="1_bxoy8"]
@@ -12,6 +12,9 @@ region = Rect2(823.1227, 99.535, 18.765442, 34.5679)
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8vuj"]
 atlas = ExtResource("1_bxoy8")
 region = Rect2(512.0364, 80.35245, 16.123291, 15.911552)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f27wv"]
+size = Vector2(6, 6)
 
 [node name="Tree" type="StaticBody2D"]
 script = ExtResource("1_88vw5")
@@ -32,3 +35,11 @@ visible = false
 position = Vector2(-20, -0.5)
 scale = Vector2(0.7, 0.7)
 texture = SubResource("AtlasTexture_q8vuj")
+
+[node name="TreeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeArea"]
+shape = SubResource("RectangleShape2D_f27wv")
+
+[connection signal="body_entered" from="TreeArea" to="." method="_on_tree_area_body_entered"]
+[connection signal="body_exited" from="TreeArea" to="." method="_on_tree_area_body_exited"]

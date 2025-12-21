@@ -1,6 +1,9 @@
 extends StaticBody2D
 
+
+var chopper
 signal statechanged
+signal done_chopping
 enum TreeState {
 	PLANTED,
 	WATERED,
@@ -25,7 +28,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
-	if health <= 0:
+	if health <= 0 and chopped != true:
+		chopper.inventory["Lumber"] += randi_range(1,5)
 		chopped = true
 	
 	if chopped == true:
@@ -45,8 +49,15 @@ func _tree_state():
 		TreeState.CHOPPING:
 			pass
 		TreeState.CHOPPED:
-			print("chopped")
 			remove_from_group("Grown_Trees")
 			add_to_group("Chopped_Trees")
 			$GrownSprite.visible = false
 			$ChoppedSprite.visible = true
+			done_chopping.emit()
+
+func _on_tree_area_body_entered(body: Node2D) -> void:
+	chopper = body
+
+
+func _on_tree_area_body_exited(body: Node2D) -> void:
+	chopper = null

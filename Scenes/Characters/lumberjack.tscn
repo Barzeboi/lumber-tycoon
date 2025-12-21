@@ -1,10 +1,12 @@
-[gd_scene load_steps=30 format=3 uid="uid://eb8ou0sifl71"]
+[gd_scene load_steps=33 format=3 uid="uid://eb8ou0sifl71"]
 
 [ext_resource type="Script" uid="uid://h0nd5nr1v2kl" path="res://Scripts/Characters/lumberjack.gd" id="1_bafrk"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="2_by02f"]
 [ext_resource type="Texture2D" uid="uid://1vkcb0tyyr8o" path="res://Assets/Characters/base_walk_strip8.png" id="2_lnp7p"]
 [ext_resource type="Texture2D" uid="uid://du2t5g52wflcx" path="res://Assets/Characters/base_axe_strip10.png" id="4_s43xq"]
 [ext_resource type="Texture2D" uid="uid://dtta76ncf2bw4" path="res://Assets/Characters/tools_axe_strip10.png" id="5_v6ntj"]
+[ext_resource type="Texture2D" uid="uid://c1ah043ln2wks" path="res://Assets/Characters/base_carry_strip8.png" id="6_8cmg0"]
+[ext_resource type="Texture2D" uid="uid://pey6atpylqoo" path="res://Assets/Characters/tools_carry_strip8.png" id="7_jikwc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_by02f"]
 radius = 10.049875
@@ -150,6 +152,7 @@ animations = [{
 resource_name = "CHOP"
 length = 0.6
 loop_mode = 1
+step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -241,6 +244,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("carry_animation:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("box_animation:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_v6ntj"]
 resource_name = "RUN"
@@ -259,8 +286,38 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
+[sub_resource type="Animation" id="Animation_8cmg0"]
+resource_name = "CARRY"
+length = 0.6
+step = 0.075
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("carry_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("box_animation:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x7j7r"]
 _data = {
+&"CARRY": SubResource("Animation_8cmg0"),
 &"CHOP": SubResource("Animation_x7j7r"),
 &"IDLE": SubResource("Animation_by02f"),
 &"RESET": SubResource("Animation_s43xq"),
@@ -309,5 +366,23 @@ hframes = 10
 visible = false
 texture = ExtResource("5_v6ntj")
 hframes = 10
+
+[node name="carry_animation" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_8cmg0")
+hframes = 8
+
+[node name="box_animation" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("7_jikwc")
+hframes = 8
+
+[node name="Label" type="Label" parent="."]
+offset_left = -8.0
+offset_top = -36.0
+offset_right = 11.0
+offset_bottom = -13.0
+theme_override_font_sizes/font_size = 16
+text = "22"
 
 [connection signal="timeout" from="ChopTimer" to="." method="_on_chop_timer_timeout"]
