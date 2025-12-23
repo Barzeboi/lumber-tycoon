@@ -15,13 +15,14 @@ enum TreeState {
 
 @export var state: TreeState = TreeState.GROWN
 @onready var chop_spot: Marker2D = $chop_spot
-var health = 4
+var health = 8
 var chopped = false
+var chopping = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	add_to_group("Grown_Trees")
+	_tree_state()
 	statechanged.connect(_tree_state)
 
 
@@ -31,13 +32,19 @@ func _process(delta: float) -> void:
 	if health <= 0 and chopped != true:
 		chopper.inventory["Lumber"] += randi_range(1,5)
 		chopped = true
+		chopping = false
 	
 	if chopped == true:
 		state = TreeState.CHOPPED
 		statechanged.emit()
 	
+	if chopping == true:
+		state = TreeState.CHOPPING
+		statechanged.emit()
+	
 func _chop():
 	health -= 1
+	chopping = true
 
 
 func _tree_state():
@@ -51,13 +58,14 @@ func _tree_state():
 		TreeState.CHOPPED:
 			remove_from_group("Grown_Trees")
 			add_to_group("Chopped_Trees")
+			$CollisionShape2D.disabled = true
 			$GrownSprite.visible = false
 			$ChoppedSprite.visible = true
+			chopper = null
 			done_chopping.emit()
 
 func _on_tree_area_body_entered(body: Node2D) -> void:
 	chopper = body
-
 
 func _on_tree_area_body_exited(body: Node2D) -> void:
 	chopper = null

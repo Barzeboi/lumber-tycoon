@@ -1,7 +1,7 @@
 extends Node
 class_name Character
 
-@export var speed: int = 75
+@export var speed: int
 @export var acceleration: int = 220
 
 

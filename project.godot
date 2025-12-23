@@ -27,6 +27,15 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Assets/": "yellow",
+"res://Scenes/": "blue",
+"res://Scripts/": "green",
+"res://addons/": "red"
+}
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

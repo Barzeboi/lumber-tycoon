@@ -8,11 +8,14 @@ extends CharacterBody2D
 var is_moving: bool = false
 var closest_tree = null
 var closest_crate = null
+var dibs = false
 var higher: bool
 var lower: bool
 var inventory_full
 var action_performed: bool = false
 var inventory: Dictionary = {"Lumber": 0}
+var currentspeed
+
 
 
 enum CharacterState {
@@ -32,7 +35,8 @@ func _ready() -> void:
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	navigation_agent.target_position = target
-	print(inventory["Lumber"])
+	#print(name)
+
 	$Label.text = str(inventory["Lumber"])
 	
 	if closest_tree == null and not Global.grown_trees.is_empty():
@@ -49,7 +53,10 @@ func _process(delta: float) -> void:
 	if closest_crate == null and not Global.crates.is_empty():
 		_find_closest_crate()
 		
-	if is_moving == true:
+	if closest_tree:
+		dibs = true
+		
+	if is_moving == true and target != closest_crate.global_position:
 		character_state = CharacterState.RUN
 	elif is_moving == false and target == wait_spot.position:
 		character_state = CharacterState.IDLE
@@ -74,10 +81,8 @@ func _process(delta: float) -> void:
 		$axe_animation.flip_h = false
 		
 	_character_state()
-	if Global.grown_trees.size() > 0:
+	if closest_tree != null:
 		_tree_state()
-	
-	
 	
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
@@ -99,17 +104,22 @@ func _physics_process(delta: float) -> void:
 	
 @warning_ignore("shadowed_variable")
 func _move(target, speed):
+	#print(speed)
 	self.position += self.position.direction_to(navigation_agent.get_next_path_position()) * get_physics_process_delta_time() * speed
 	navigation_agent.target_position = target
 	if speed > 0:
 		is_moving = true
 	else:
 		is_moving = false
-		
+	currentspeed = speed
+	
+	if (speed != currentspeed):
+		print(name + ":" + " Speed Changed")
 # (10/26/25) Idk why, but removing the "is_moving" line in the "_reached" function
 # although outwardly redundant, causes the character to behave oddly while trying to stop
 func _reached():
 	is_moving = false
+	
 
 func _find_closest_tree():
 	var current_distance = 999999
@@ -119,6 +129,8 @@ func _find_closest_tree():
 			if tree.state == tree.TreeState.CHOPPING:
 				continue
 			if tree.state == tree.TreeState.CHOPPED:
+				continue
+			if tree.chopper:
 				continue
 			var tree_distance = self.global_position.distance_to(tree.global_position)
 			if tree_distance < current_distance:
@@ -153,7 +165,6 @@ func _drop():
 	closest_crate.store["Lumber"] += inventory["Lumber"]
 	inventory["Lumber"] -= inventory["Lumber"]
 	
-
 func _on_chop_timer_timeout() -> void:
 	action_performed = false
 	
@@ -197,6 +208,10 @@ func _character_state():
 			_drop()
 
 func _tree_state():
-	match closest_tree.state:
-		closest_tree.TreeState.CHOPPED:
-			closest_tree = null
+	if dibs == true:
+		match closest_tree.state:
+			closest_tree.TreeState.CHOPPING:
+				if closest_tree.chopper != null and closest_tree.chopper != self:
+					_find_closest_tree()
+			closest_tree.TreeState.CHOPPED:
+				closest_tree = null
