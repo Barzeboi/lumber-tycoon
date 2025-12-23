@@ -8,7 +8,6 @@ extends CharacterBody2D
 var is_moving: bool = false
 var closest_tree = null
 var closest_crate = null
-var dibs = false
 var higher: bool
 var lower: bool
 var inventory_full
@@ -52,9 +51,6 @@ func _process(delta: float) -> void:
 	
 	if closest_crate == null and not Global.crates.is_empty():
 		_find_closest_crate()
-		
-	if closest_tree:
-		dibs = true
 		
 	if is_moving == true and target != closest_crate.global_position:
 		character_state = CharacterState.RUN
@@ -208,7 +204,6 @@ func _character_state():
 			_drop()
 
 func _tree_state():
-	if dibs == true:
 		match closest_tree.state:
 			closest_tree.TreeState.CHOPPING:
 				if closest_tree.chopper != null and closest_tree.chopper != self:
