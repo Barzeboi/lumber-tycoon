@@ -41,6 +41,7 @@ func _process(delta: float) -> void:
 	if chopping == true:
 		state = TreeState.CHOPPING
 		statechanged.emit()
+		#print(name + ": " + str(chopper))
 	
 func _chop():
 	health -= 1

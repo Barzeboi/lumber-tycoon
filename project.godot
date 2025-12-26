@@ -36,6 +36,13 @@ folder_colors={
 "res://addons/": "red"
 }
 
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Characters"
+2d_physics/layer_3="Crate"
+2d_physics/layer_4="Trees"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

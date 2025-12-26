@@ -1779,4 +1779,4 @@ position = Vector2(507, 115)
 position = Vector2(530, 426)
 
 [node name="Lumberjack2" parent="." instance=ExtResource("4_vadfg")]
-position = Vector2(454, 128)
+position = Vector2(573, 398)

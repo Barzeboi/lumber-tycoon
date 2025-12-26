@@ -17,6 +17,8 @@ region = Rect2(512.0364, 80.35245, 16.123291, 15.911552)
 size = Vector2(6, 6)
 
 [node name="Tree" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_88vw5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -41,6 +43,8 @@ texture = SubResource("AtlasTexture_q8vuj")
 visible = false
 
 [node name="TreeArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TreeArea"]
 shape = SubResource("RectangleShape2D_f27wv")

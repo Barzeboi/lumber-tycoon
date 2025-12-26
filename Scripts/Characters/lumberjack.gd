@@ -8,8 +8,6 @@ extends CharacterBody2D
 var is_moving: bool = false
 var closest_tree = null
 var closest_crate = null
-var higher: bool
-var lower: bool
 var inventory_full
 var action_performed: bool = false
 var inventory: Dictionary = {"Lumber": 0}
@@ -80,6 +78,8 @@ func _process(delta: float) -> void:
 	if closest_tree != null:
 		_tree_state()
 	
+
+	
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	match character_state:
@@ -148,11 +148,13 @@ func _find_closest_crate():
 	return closest_crate
 	
 func _chop():
-	closest_tree._chop()
-	action_performed = true
-	$ChopTimer.start()
-	if animation_player.animation_finished:
-		animation_player.play("IDLE")
+	if closest_tree != null:
+		print(name + "chop")
+		action_performed = true
+		$ChopTimer.start()
+		if animation_player.animation_finished and closest_tree.health > 0:
+			closest_tree._chop()
+		
 
 func _carry():
 	pass
