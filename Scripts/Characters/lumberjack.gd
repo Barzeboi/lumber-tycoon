@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Character
 
 @export var target: Vector2
 @export var target_position: Vector2
@@ -15,16 +15,7 @@ var currentspeed
 
 
 
-enum CharacterState {
-	IDLE,
-	RUN,
-	CHOP,
-	CARRY,
-	COLLECT,
-	DROP
-}
 
-@export var character_state: CharacterState = CharacterState.IDLE
 
 func _ready() -> void:
 	pass
