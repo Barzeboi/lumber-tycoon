@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://eb8ou0sifl71"]
+[gd_scene load_steps=34 format=3 uid="uid://eb8ou0sifl71"]
 
 [ext_resource type="Script" uid="uid://h0nd5nr1v2kl" path="res://Scripts/Characters/lumberjack.gd" id="1_bafrk"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="2_by02f"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dtta76ncf2bw4" path="res://Assets/Characters/tools_axe_strip10.png" id="5_v6ntj"]
 [ext_resource type="Texture2D" uid="uid://c1ah043ln2wks" path="res://Assets/Characters/base_carry_strip8.png" id="6_8cmg0"]
 [ext_resource type="Texture2D" uid="uid://pey6atpylqoo" path="res://Assets/Characters/tools_carry_strip8.png" id="7_jikwc"]
+[ext_resource type="Texture2D" uid="uid://byp8xw0hhisu1" path="res://Assets/Characters/tools_idle_strip9.png" id="8_jikwc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_by02f"]
 radius = 4.0
@@ -210,6 +211,8 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_by02f"]
 resource_name = "IDLE"
 length = 0.6
+loop_mode = 1
+step = 0.0667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -218,6 +221,18 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.069993, 0.1399745, 0.20998994, 0.28, 0.35, 0.42, 0.49, 0.56),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("arm_animation:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0667, 0.1334, 0.20009999, 0.2668, 0.33349997, 0.40019998, 0.4669, 0.5336),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -297,6 +312,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("arm_animation:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_v6ntj"]
 resource_name = "RUN"
@@ -350,7 +377,6 @@ libraries = {
 }
 
 [node name="idle_animation" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("2_by02f")
 hframes = 9
 
@@ -378,6 +404,10 @@ hframes = 8
 visible = false
 texture = ExtResource("7_jikwc")
 hframes = 8
+
+[node name="arm_animation" type="Sprite2D" parent="."]
+texture = ExtResource("8_jikwc")
+hframes = 9
 
 [node name="Label" type="Label" parent="."]
 offset_left = -8.0

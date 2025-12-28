@@ -1,16 +1,197 @@
-[gd_scene load_steps=6 format=3 uid="uid://l7qji6o80471"]
+[gd_scene load_steps=15 format=3 uid="uid://l7qji6o80471"]
 
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="1_o3l5m"]
 [ext_resource type="Texture2D" uid="uid://1vkcb0tyyr8o" path="res://Assets/Characters/base_walk_strip8.png" id="2_a4vhm"]
-[ext_resource type="Texture2D" uid="uid://c1ah043ln2wks" path="res://Assets/Characters/base_carry_strip8.png" id="3_2q0b3"]
+[ext_resource type="Texture2D" uid="uid://ch2gjinqdgsw3" path="res://Assets/Characters/base_doing_strip8.png" id="3_o76xi"]
 [ext_resource type="Texture2D" uid="uid://ct8pqmtgffnij" path="res://Assets/Characters/curlyhair_carry_strip8.png" id="4_jq8ka"]
+[ext_resource type="Texture2D" uid="uid://byp8xw0hhisu1" path="res://Assets/Characters/tools_idle_strip9.png" id="4_o76xi"]
+[ext_resource type="Texture2D" uid="uid://vh5tdg1ct8ut" path="res://Assets/Characters/tools_run_strip8.png" id="5_o76xi"]
+[ext_resource type="Texture2D" uid="uid://bi7e1o6vv2uin" path="res://Assets/Characters/curlyhair_run_strip8.png" id="6_v0xmh"]
+[ext_resource type="Texture2D" uid="uid://gr34r36glf0p" path="res://Assets/Characters/curlyhair_idle_strip9.png" id="7_o8h04"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o76xi"]
+
+[sub_resource type="Animation" id="Animation_8q8h8"]
+resource_name = "IDLE"
+length = 0.6
+loop_mode = 1
+step = 0.0667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("idle_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0667, 0.1334, 0.20009999, 0.2668, 0.33349997, 0.40019998, 0.4669, 0.5336),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hair_idle:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0667, 0.1334, 0.20009999, 0.2668, 0.33349997, 0.40019998, 0.4669, 0.5336),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("arm_animation:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0667, 0.1334, 0.20009999, 0.2668, 0.33349997, 0.40019998, 0.4669, 0.5336),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_krfrc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("idle_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hair_idle:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("arm_animation:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("run_animation:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("run_arm_animation:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("doing_animation:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jq8ka"]
+resource_name = "RUN"
+length = 0.6
+loop_mode = 1
+step = 0.075
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("run_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("run_arm_animation:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_v0xmh"]
+resource_name = "DOING"
+length = 0.6
+step = 0.075
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("doing_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4i3h"]
+_data = {
+&"DOING": SubResource("Animation_v0xmh"),
+&"IDLE": SubResource("Animation_8q8h8"),
+&"RESET": SubResource("Animation_krfrc"),
+&"RUN": SubResource("Animation_jq8ka")
+}
 
 [node name="Planter" type="CharacterBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_o76xi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w4i3h")
+}
 
 [node name="idle_animation" type="Sprite2D" parent="."]
 visible = false
@@ -22,12 +203,36 @@ visible = false
 texture = ExtResource("2_a4vhm")
 hframes = 8
 
-[node name="carry_animation" type="Sprite2D" parent="."]
+[node name="doing_animation" type="Sprite2D" parent="."]
+texture = ExtResource("3_o76xi")
+hframes = 8
+
+[node name="hair_doing" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("3_2q0b3")
+
+[node name="arm_animation" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_o76xi")
+hframes = 9
+
+[node name="run_arm_animation" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2, 2)
+texture = ExtResource("5_o76xi")
 hframes = 8
 
 [node name="hair_carry" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("4_jq8ka")
+hframes = 8
+frame = 1
 
 [node name="hair_run" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_v0xmh")
+hframes = 8
+
+[node name="hair_idle" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("7_o8h04")
+hframes = 9
