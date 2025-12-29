@@ -1,15 +1,63 @@
-[gd_scene load_steps=15 format=3 uid="uid://l7qji6o80471"]
+[gd_scene load_steps=22 format=3 uid="uid://l7qji6o80471"]
 
+[ext_resource type="Script" uid="uid://dui1tio6voylo" path="res://Scenes/Characters/planter.gd" id="1_b21ok"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="1_o3l5m"]
 [ext_resource type="Texture2D" uid="uid://1vkcb0tyyr8o" path="res://Assets/Characters/base_walk_strip8.png" id="2_a4vhm"]
 [ext_resource type="Texture2D" uid="uid://ch2gjinqdgsw3" path="res://Assets/Characters/base_doing_strip8.png" id="3_o76xi"]
 [ext_resource type="Texture2D" uid="uid://ct8pqmtgffnij" path="res://Assets/Characters/curlyhair_carry_strip8.png" id="4_jq8ka"]
+[ext_resource type="Texture2D" uid="uid://docm6ij1dx42l" path="res://Assets/Characters/curlyhair_doing_strip8.png" id="4_o8h04"]
 [ext_resource type="Texture2D" uid="uid://byp8xw0hhisu1" path="res://Assets/Characters/tools_idle_strip9.png" id="4_o76xi"]
+[ext_resource type="Texture2D" uid="uid://xrgtb488db4l" path="res://Assets/Characters/base_watering_strip5.png" id="4_w4i3h"]
 [ext_resource type="Texture2D" uid="uid://vh5tdg1ct8ut" path="res://Assets/Characters/tools_run_strip8.png" id="5_o76xi"]
 [ext_resource type="Texture2D" uid="uid://bi7e1o6vv2uin" path="res://Assets/Characters/curlyhair_run_strip8.png" id="6_v0xmh"]
+[ext_resource type="Texture2D" uid="uid://d2mnrqmne5j7q" path="res://Assets/Characters/tools_doing_strip8.png" id="7_8q8h8"]
 [ext_resource type="Texture2D" uid="uid://gr34r36glf0p" path="res://Assets/Characters/curlyhair_idle_strip9.png" id="7_o8h04"]
+[ext_resource type="Texture2D" uid="uid://i11iap1xnjvc" path="res://Assets/Characters/tools_watering_strip5.png" id="8_b21ok"]
+[ext_resource type="Texture2D" uid="uid://07dyjivco7nh" path="res://Assets/Characters/curlyhair_watering_strip5.png" id="13_m65m8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o76xi"]
+
+[sub_resource type="Animation" id="Animation_v0xmh"]
+resource_name = "DOING"
+length = 0.6
+loop_mode = 1
+step = 0.075
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("doing_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hair_doing:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("doing_arm_animation:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
 
 [sub_resource type="Animation" id="Animation_8q8h8"]
 resource_name = "IDLE"
@@ -127,6 +175,66 @@ tracks/5/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("hair_doing:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("doing_arm_animation:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("watering_animation:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("hair_watering:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("watering_arm_animation:frame")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_jq8ka"]
 resource_name = "RUN"
@@ -158,21 +266,46 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_v0xmh"]
-resource_name = "DOING"
+[sub_resource type="Animation" id="Animation_kcwyw"]
+resource_name = "WATERING"
 length = 0.6
-step = 0.075
+loop_mode = 1
+step = 0.12
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("doing_animation:frame")
+tracks/0/path = NodePath("watering_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.35999998, 0.48),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hair_watering:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.35999998, 0.48),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("watering_arm_animation:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.35999998, 0.48),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w4i3h"]
@@ -180,10 +313,12 @@ _data = {
 &"DOING": SubResource("Animation_v0xmh"),
 &"IDLE": SubResource("Animation_8q8h8"),
 &"RESET": SubResource("Animation_krfrc"),
-&"RUN": SubResource("Animation_jq8ka")
+&"RUN": SubResource("Animation_jq8ka"),
+&"WATERING": SubResource("Animation_kcwyw")
 }
 
 [node name="Planter" type="CharacterBody2D"]
+script = ExtResource("1_b21ok")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_o76xi")
@@ -192,6 +327,8 @@ shape = SubResource("CircleShape2D_o76xi")
 libraries = {
 &"": SubResource("AnimationLibrary_w4i3h")
 }
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="idle_animation" type="Sprite2D" parent="."]
 visible = false
@@ -204,11 +341,14 @@ texture = ExtResource("2_a4vhm")
 hframes = 8
 
 [node name="doing_animation" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("3_o76xi")
 hframes = 8
 
-[node name="hair_doing" type="Sprite2D" parent="."]
+[node name="watering_animation" type="Sprite2D" parent="."]
 visible = false
+texture = ExtResource("4_w4i3h")
+hframes = 5
 
 [node name="arm_animation" type="Sprite2D" parent="."]
 visible = false
@@ -220,6 +360,16 @@ visible = false
 position = Vector2(2, 2)
 texture = ExtResource("5_o76xi")
 hframes = 8
+
+[node name="doing_arm_animation" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("7_8q8h8")
+hframes = 8
+
+[node name="watering_arm_animation" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("8_b21ok")
+hframes = 5
 
 [node name="hair_carry" type="Sprite2D" parent="."]
 visible = false
@@ -236,3 +386,13 @@ hframes = 8
 visible = false
 texture = ExtResource("7_o8h04")
 hframes = 9
+
+[node name="hair_doing" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_o8h04")
+hframes = 8
+
+[node name="hair_watering" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("13_m65m8")
+hframes = 5

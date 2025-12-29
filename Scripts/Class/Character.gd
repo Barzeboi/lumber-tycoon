@@ -3,7 +3,9 @@ class_name Character
 
 @export var speed: int
 @export var acceleration: int = 220
+@export var target: Vector2
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+var closest_tree = null
 var closest_crate = null
 var is_moving: bool = false
 

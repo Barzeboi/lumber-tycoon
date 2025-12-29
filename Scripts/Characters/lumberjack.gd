@@ -1,12 +1,8 @@
 extends Character
 
-@export var target: Vector2
-@export var target_position: Vector2
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var wait_spot: Marker2D = $"../wait_spot"
-
-var closest_tree = null
-
 var inventory_full
 var action_performed: bool = false
 var inventory: Dictionary = {"Lumber": 0}
