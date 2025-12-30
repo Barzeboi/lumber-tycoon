@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://l7qji6o80471"]
 
-[ext_resource type="Script" uid="uid://dui1tio6voylo" path="res://Scenes/Characters/planter.gd" id="1_b21ok"]
+[ext_resource type="Script" uid="uid://dui1tio6voylo" path="res://Scripts/Characters/planter.gd" id="1_b21ok"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="1_o3l5m"]
 [ext_resource type="Texture2D" uid="uid://1vkcb0tyyr8o" path="res://Assets/Characters/base_walk_strip8.png" id="2_a4vhm"]
 [ext_resource type="Texture2D" uid="uid://ch2gjinqdgsw3" path="res://Assets/Characters/base_doing_strip8.png" id="3_o76xi"]

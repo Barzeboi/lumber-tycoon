@@ -1,16 +1,9 @@
 extends Character
 
-
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var wait_spot: Marker2D = $"../wait_spot"
 var inventory_full
 var action_performed: bool = false
 var inventory: Dictionary = {"Lumber": 0}
 var currentspeed
-
-
-
-
 
 func _ready() -> void:
 	pass
@@ -82,7 +75,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		is_moving = true
 
-	move_and_slide()
+
 	
 # (10/26/25) Idk why, but removing the "is_moving" line in the "_reached" function
 # although outwardly redundant, causes the character to behave oddly while trying to stop
@@ -106,6 +99,19 @@ func _find_closest_tree():
 				current_distance = tree_distance
 				closest_tree = tree
 	return closest_tree
+	
+func _find_closest_crate():
+	var current_distance = 999999
+	closest_crate = null
+	for crate in Global.crates:
+		if Global.crates.size() > 0:
+			if crate.state == crate.CrateState.FULL:
+				continue
+			var crate_distance = self.global_position.distance_to(crate.global_position)
+			if crate_distance < current_distance:
+				current_distance = crate_distance
+				closest_crate = crate
+	return closest_crate
 	
 
 	

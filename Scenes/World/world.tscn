@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://bqu0cfhdbjlgv"]
+[gd_scene load_steps=10 format=4 uid="uid://bqu0cfhdbjlgv"]
 
 [ext_resource type="Texture2D" uid="uid://gv0804cpg6pu" path="res://Assets/Tiles/spr_tileset_sunnysideworld_16px.png" id="1_t1gg8"]
 [ext_resource type="PackedScene" uid="uid://dr4gwalvmpqp6" path="res://Scenes/Misc/wait_spot.tscn" id="3_3rhlx"]
 [ext_resource type="PackedScene" uid="uid://eb8ou0sifl71" path="res://Scenes/Characters/lumberjack.tscn" id="4_vadfg"]
 [ext_resource type="PackedScene" uid="uid://7n8lqpxeev33" path="res://Scenes/Misc/tree_plot.tscn" id="5_adcqc"]
 [ext_resource type="PackedScene" uid="uid://d153gy5d61ieg" path="res://Scenes/Misc/crate.tscn" id="5_l1hd3"]
+[ext_resource type="PackedScene" uid="uid://l7qji6o80471" path="res://Scenes/Characters/planter.tscn" id="6_adcqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yp2ti"]
 texture = ExtResource("1_t1gg8")
@@ -1780,3 +1781,6 @@ position = Vector2(530, 426)
 
 [node name="Lumberjack2" parent="." instance=ExtResource("4_vadfg")]
 position = Vector2(573, 398)
+
+[node name="Planter" parent="." instance=ExtResource("6_adcqc")]
+position = Vector2(883, 437)
