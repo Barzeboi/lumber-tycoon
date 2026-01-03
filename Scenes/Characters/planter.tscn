@@ -1,10 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://l7qji6o80471"]
+[gd_scene load_steps=21 format=3 uid="uid://l7qji6o80471"]
 
 [ext_resource type="Script" uid="uid://dui1tio6voylo" path="res://Scripts/Characters/planter.gd" id="1_b21ok"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="1_o3l5m"]
 [ext_resource type="Texture2D" uid="uid://1vkcb0tyyr8o" path="res://Assets/Characters/base_walk_strip8.png" id="2_a4vhm"]
 [ext_resource type="Texture2D" uid="uid://ch2gjinqdgsw3" path="res://Assets/Characters/base_doing_strip8.png" id="3_o76xi"]
-[ext_resource type="Texture2D" uid="uid://ct8pqmtgffnij" path="res://Assets/Characters/curlyhair_carry_strip8.png" id="4_jq8ka"]
 [ext_resource type="Texture2D" uid="uid://docm6ij1dx42l" path="res://Assets/Characters/curlyhair_doing_strip8.png" id="4_o8h04"]
 [ext_resource type="Texture2D" uid="uid://byp8xw0hhisu1" path="res://Assets/Characters/tools_idle_strip9.png" id="4_o76xi"]
 [ext_resource type="Texture2D" uid="uid://xrgtb488db4l" path="res://Assets/Characters/base_watering_strip5.png" id="4_w4i3h"]
@@ -25,7 +24,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("doing_animation:frame")
+tracks/0/path = NodePath("doing_sprites/doing_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -37,7 +36,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("hair_doing:frame")
+tracks/1/path = NodePath("doing_sprites/hair_doing:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -49,7 +48,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("doing_arm_animation:frame")
+tracks/2/path = NodePath("doing_sprites/doing_arm_animation:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -67,7 +66,7 @@ step = 0.0667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("idle_animation:frame")
+tracks/0/path = NodePath("idle_sprites/idle_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +78,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("hair_idle:frame")
+tracks/1/path = NodePath("idle_sprites/hair_idle:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -91,7 +90,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("arm_animation:frame")
+tracks/2/path = NodePath("idle_sprites/arm_animation:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -106,7 +105,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("idle_animation:frame")
+tracks/0/path = NodePath("idle_sprites/idle_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -118,7 +117,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("hair_idle:frame")
+tracks/1/path = NodePath("idle_sprites/hair_idle:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -130,7 +129,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("arm_animation:frame")
+tracks/2/path = NodePath("idle_sprites/arm_animation:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -142,7 +141,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("run_animation:frame")
+tracks/3/path = NodePath("run_sprites/run_animation:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -154,7 +153,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("run_arm_animation:frame")
+tracks/4/path = NodePath("run_sprites/run_arm_animation:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -166,7 +165,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("doing_animation:frame")
+tracks/5/path = NodePath("doing_sprites/doing_animation:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -178,7 +177,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("hair_doing:frame")
+tracks/6/path = NodePath("doing_sprites/hair_doing:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -190,7 +189,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("doing_arm_animation:frame")
+tracks/7/path = NodePath("doing_sprites/doing_arm_animation:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -202,7 +201,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("watering_animation:frame")
+tracks/8/path = NodePath("watering_sprites/watering_animation:frame")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -214,7 +213,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("hair_watering:frame")
+tracks/9/path = NodePath("watering_sprites/hair_watering:frame")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -226,7 +225,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("watering_arm_animation:frame")
+tracks/10/path = NodePath("watering_sprites/watering_arm_animation:frame")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -244,7 +243,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("run_animation:frame")
+tracks/0/path = NodePath("run_sprites/run_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -256,7 +255,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("run_arm_animation:frame")
+tracks/1/path = NodePath("run_sprites/run_arm_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -274,7 +273,7 @@ step = 0.12
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("watering_animation:frame")
+tracks/0/path = NodePath("watering_sprites/watering_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -286,7 +285,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("hair_watering:frame")
+tracks/1/path = NodePath("watering_sprites/hair_watering:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -298,7 +297,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("watering_arm_animation:frame")
+tracks/2/path = NodePath("watering_sprites/watering_arm_animation:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -330,69 +329,68 @@ libraries = {
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="idle_animation" type="Sprite2D" parent="."]
+[node name="idle_sprites" type="Node2D" parent="."]
 visible = false
+
+[node name="idle_animation" type="Sprite2D" parent="idle_sprites"]
 texture = ExtResource("1_o3l5m")
 hframes = 9
 
-[node name="run_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_a4vhm")
-hframes = 8
-
-[node name="doing_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_o76xi")
-hframes = 8
-
-[node name="watering_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("4_w4i3h")
-hframes = 5
-
-[node name="arm_animation" type="Sprite2D" parent="."]
-visible = false
+[node name="arm_animation" type="Sprite2D" parent="idle_sprites"]
 texture = ExtResource("4_o76xi")
 hframes = 9
 
-[node name="run_arm_animation" type="Sprite2D" parent="."]
+[node name="hair_idle" type="Sprite2D" parent="idle_sprites"]
+texture = ExtResource("7_o8h04")
+hframes = 9
+
+[node name="run_sprites" type="Node2D" parent="."]
 visible = false
+
+[node name="run_animation" type="Sprite2D" parent="run_sprites"]
+texture = ExtResource("2_a4vhm")
+hframes = 8
+
+[node name="run_arm_animation" type="Sprite2D" parent="run_sprites"]
 position = Vector2(2, 2)
 texture = ExtResource("5_o76xi")
 hframes = 8
 
-[node name="doing_arm_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("7_8q8h8")
-hframes = 8
-
-[node name="watering_arm_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("8_b21ok")
-hframes = 5
-
-[node name="hair_carry" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("4_jq8ka")
-hframes = 8
-frame = 1
-
-[node name="hair_run" type="Sprite2D" parent="."]
-visible = false
+[node name="hair_run" type="Sprite2D" parent="run_sprites"]
 texture = ExtResource("6_v0xmh")
 hframes = 8
 
-[node name="hair_idle" type="Sprite2D" parent="."]
+[node name="doing_sprites" type="Node2D" parent="."]
 visible = false
-texture = ExtResource("7_o8h04")
-hframes = 9
 
-[node name="hair_doing" type="Sprite2D" parent="."]
-visible = false
+[node name="doing_animation" type="Sprite2D" parent="doing_sprites"]
+texture = ExtResource("3_o76xi")
+hframes = 8
+
+[node name="hair_doing" type="Sprite2D" parent="doing_sprites"]
 texture = ExtResource("4_o8h04")
 hframes = 8
 
-[node name="hair_watering" type="Sprite2D" parent="."]
+[node name="doing_arm_animation" type="Sprite2D" parent="doing_sprites"]
+texture = ExtResource("7_8q8h8")
+hframes = 8
+
+[node name="watering_sprites" type="Node2D" parent="."]
 visible = false
+
+[node name="watering_animation" type="Sprite2D" parent="watering_sprites"]
+texture = ExtResource("4_w4i3h")
+hframes = 5
+
+[node name="watering_arm_animation" type="Sprite2D" parent="watering_sprites"]
+texture = ExtResource("8_b21ok")
+hframes = 5
+
+[node name="hair_watering" type="Sprite2D" parent="watering_sprites"]
 texture = ExtResource("13_m65m8")
 hframes = 5
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

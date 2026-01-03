@@ -6,7 +6,6 @@ signal statechanged
 signal done_chopping
 enum TreeState {
 	PLANTED,
-	WATERED,
 	GROWING,
 	GROWN,
 	CHOPPING,
@@ -16,8 +15,10 @@ enum TreeState {
 @export var state: TreeState = TreeState.GROWN
 @onready var chop_spot: Marker2D = $chop_spot
 var health = 8
+var full_health = 8
 var chopped = false
 var chopping = false
+var watered = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -46,14 +47,26 @@ func _process(delta: float) -> void:
 func _chop():
 	health -= 1
 	chopping = true
+	
+func _planted():
+	chopped = false
+	health = full_health
+	state = TreeState.PLANTED
+	print(name + ": " + str(state))
+	statechanged.emit()
 
 
 func _tree_state():
 	match state:
+		TreeState.PLANTED:
+			remove_from_group("Chopped_Trees")
+			add_to_group("Growing_Trees")
 		TreeState.GROWN:
 			add_to_group("Grown_Trees")
 			$GrownSprite.visible = true
 			$ChoppedSprite.visible = false
+		TreeState.GROWING:
+			pass
 		TreeState.CHOPPING:
 			pass
 		TreeState.CHOPPED:

@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-var store: Dictionary = {"Lumber": 0, "Planks": 0, "Furniture": 0, "Seeds": 20}
+var store: Dictionary = {"Lumber": 0, "Planks": 0, "Furniture": 0, "Seeds": 100}
 
 enum CrateState {
 	NOT_FULL,

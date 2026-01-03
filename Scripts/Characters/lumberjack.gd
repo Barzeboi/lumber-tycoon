@@ -1,7 +1,6 @@
 extends Character
 
-var inventory_full
-var action_performed: bool = false
+var inventory_full = 10
 var inventory: Dictionary = {"Lumber": 0}
 var currentspeed
 
@@ -117,7 +116,6 @@ func _find_closest_crate():
 	
 func _chop():
 	if closest_tree != null:
-		print(name + "chop")
 		action_performed = true
 		$ChopTimer.start()
 		if animation_player.animation_finished and closest_tree.health > 0:

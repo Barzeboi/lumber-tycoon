@@ -10,6 +10,8 @@ class_name Character
 var closest_tree = null
 var closest_crate = null
 var is_moving: bool = false
+var action_performed: bool = false
+var reached: bool = false
 
 enum CharacterState {
 	IDLE,
@@ -20,7 +22,8 @@ enum CharacterState {
 	DROP,
 	SUPPLY,
 	PLANT,
-	WATER
+	WATER,
+	TAKE
 }
 
 @export var character_state: CharacterState = CharacterState.IDLE
