@@ -49,10 +49,10 @@ func _chop():
 	chopping = true
 	
 func _planted():
-	chopped = false
 	health = full_health
 	state = TreeState.PLANTED
-	print(name + ": " + str(state))
+	chopped = false
+	#print(name + ": " + str(state))
 	statechanged.emit()
 
 
@@ -60,13 +60,14 @@ func _tree_state():
 	match state:
 		TreeState.PLANTED:
 			remove_from_group("Chopped_Trees")
-			add_to_group("Growing_Trees")
+			add_to_group("Planted_Trees")
 		TreeState.GROWN:
 			add_to_group("Grown_Trees")
 			$GrownSprite.visible = true
 			$ChoppedSprite.visible = false
 		TreeState.GROWING:
-			pass
+			remove_from_group("Planted_Trees")
+			add_to_group("Growing_Trees")
 		TreeState.CHOPPING:
 			pass
 		TreeState.CHOPPED:
@@ -82,4 +83,5 @@ func _on_tree_area_body_entered(body: Node2D) -> void:
 	chopper = body
 
 func _on_tree_area_body_exited(body: Node2D) -> void:
+	await get_tree().process_frame
 	chopper = null

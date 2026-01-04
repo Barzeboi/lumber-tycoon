@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjco0yefdo48s"]
+
+[ext_resource type="Texture2D" uid="uid://dngaubianwplh" path="res://Assets/UI/UI_border.png" id="1_8leah"]
+[ext_resource type="Texture2D" uid="uid://dkhsc67vx1wtr" path="res://Assets/UI/Screenshot (117).png" id="2_7lq3g"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_8leah")
+
+[node name="Label" type="Label" parent="Control/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 199.0
+offset_top = 65.0
+offset_right = 245.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 40
+text = "$0"
+
+[node name="TabContainer" type="TabContainer" parent="Control"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 363.0
+offset_right = 1100.0
+offset_bottom = 594.0
+tab_alignment = 1
+current_tab = 0
+
+[node name="Characters" type="TabBar" parent="Control/TabContainer"]
+layout_mode = 2
+tab_close_display_policy = 1
+metadata/_tab_index = 0
+
+[node name="Button" type="Button" parent="Control/TabContainer/Characters"]
+layout_mode = 0
+offset_right = 136.0
+offset_bottom = 200.0
+icon = ExtResource("2_7lq3g")
+
+[node name="Buildings" type="TabBar" parent="Control/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
