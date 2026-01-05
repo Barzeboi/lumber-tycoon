@@ -352,6 +352,7 @@ _data = {
 }
 
 [node name="Lumberjack" type="CharacterBody2D"]
+scale = Vector2(1.25, 1.25)
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_bafrk")

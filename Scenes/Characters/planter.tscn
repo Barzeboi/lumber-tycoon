@@ -317,6 +317,7 @@ _data = {
 }
 
 [node name="Planter" type="CharacterBody2D"]
+scale = Vector2(1.25, 1.25)
 script = ExtResource("1_b21ok")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

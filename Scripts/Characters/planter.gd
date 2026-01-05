@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 		if inventory["Seeds"] >= 1:
 			target = closest_tree.global_position
 	if closest_tree == null:
-		if Global.chopped_trees.size() > 1:
+		if Global.chopped_trees.size() >= 1:
 			_find_closest_chopped_tree()
 		elif Global.chopped_trees.size() < 1 and Global.planted_trees.size() < 1:
 			target = wait_spot.global_position
