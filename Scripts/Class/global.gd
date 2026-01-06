@@ -5,14 +5,16 @@ extends Node
 @onready var growing_trees = get_tree().get_nodes_in_group("Growing_Trees")
 @onready var chopped_trees = get_tree().get_nodes_in_group("Chopped_Trees")
 @onready var crates = get_tree().get_nodes_in_group("Crates")
-var Contract1
-var Contract2
-var Contract3
-var Contract1Won: bool
-var Contract2Won: bool
-var Contract3Won: bool
-
+var contract
+var contract_won
 var goods_delivered: int
+
+
+enum ContractType{
+	LUMBER,
+	PLANKS,
+	FURNITURE
+}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
