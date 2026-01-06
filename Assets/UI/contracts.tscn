@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct1hvve3jv78d"]
+
+[ext_resource type="Script" uid="uid://ue4w3ojd4cx" path="res://Scripts/Class/contracts.gd" id="1_hlm6n"]
+[ext_resource type="FontFile" uid="uid://bwt5s7vxugo5k" path="res://Assets/Fonts/BlockCraft.otf" id="2_31tov"]
+
+[node name="Contracts" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hlm6n")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0017361111
+anchor_top = 0.09259259
+anchor_right = -0.0017361111
+anchor_bottom = 0.09259259
+offset_left = 1.0
+offset_top = 55.0
+offset_right = 187.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("2_31tov")
+theme_override_font_sizes/font_size = 40
+text = "Contracts:"
+metadata/_edit_use_anchors_ = true
+
+[node name="No_Contracts" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 177.0
+offset_right = 177.0
+offset_bottom = 235.0
+theme_override_fonts/font = ExtResource("2_31tov")
+theme_override_font_sizes/font_size = 24
+text = "Contract1
+Contract2
+Contract3"
