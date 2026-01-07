@@ -80,6 +80,18 @@ func _physics_process(delta: float) -> void:
 # although outwardly redundant, causes the character to behave oddly while trying to stop
 func _reached():
 	is_moving = false
+	match target:
+		closest_tree.global_position:
+			character_state = CharacterState.CHOP
+
+func _change_state(new_state: CharacterState):
+	pass
+
+func _exit_state(state):
+	pass
+
+func _enter_state(state: CharacterState):
+	pass
 	
 
 func _find_closest_tree():

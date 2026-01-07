@@ -27,6 +27,7 @@ enum CharacterState {
 }
 
 @export var character_state: CharacterState = CharacterState.IDLE
+@export var previous_state: CharacterState
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
