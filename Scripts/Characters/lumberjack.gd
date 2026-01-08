@@ -14,6 +14,54 @@ func _process(delta: float) -> void:
 
 	$Label.text = str(inventory["Lumber"])
 	
+	match CharacterState:
+		CharacterState.IDLE:
+			if inventory["Lumber"] >= inventory_full:
+				if closest_crate == null:
+					_find_closest_crate()
+				if closest_crate:
+					_change_state(CharacterState.MOVE_TO_CRATE)
+			
+			elif closest_tree == null:
+				_find_closest_tree()
+			elif closest_tree:
+				_change_state(CharacterState.MOVE_TO_TREE)
+			
+			else:
+				_change_state(CharacterState.MOVE_TO_SPOT)
+		CharacterState.MOVE_TO_TREE:
+			if _reached():
+				_change_state(CharacterState.CHOP)
+		CharacterState.CHOP:
+			if closest_tree <= 0:
+				closest_tree._planted()
+				_change_state(CharacterState.IDLE)
+		CharacterState.MOVE_TO_CRATE:
+			if _reached():
+				_change_state(CharacterState.DROP)
+				
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	if closest_tree == null and not Global.grown_trees.is_empty():
 		_find_closest_tree()
 	elif closest_crate != null and inventory["Lumber"] >= 10:
@@ -61,14 +109,14 @@ func _process(delta: float) -> void:
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	match character_state:
-		CharacterState.RUN:
-			_move(target,70)
-		CharacterState.IDLE:
-			_move(target, 0)
-		CharacterState.CHOP:
-			_move(target, 0)
-		CharacterState.CARRY:
+		CharacterState.MOVE_TO_TREE:
+			_move(target, 70)
+		CharacterState.MOVE_TO_CRATE:
 			_move(target, 50)
+		CharacterState.MOVE_TO_SPOT:
+			_move(target, 70)
+		_:
+			_move(global_position, 0)
 	if self.position.distance_to(target) <= 1:
 		_reached()
 	else:
@@ -80,18 +128,35 @@ func _physics_process(delta: float) -> void:
 # although outwardly redundant, causes the character to behave oddly while trying to stop
 func _reached():
 	is_moving = false
-	match target:
-		closest_tree.global_position:
-			character_state = CharacterState.CHOP
 
 func _change_state(new_state: CharacterState):
-	pass
-
-func _exit_state(state):
-	pass
+	if character_state == new_state: return
+	_exit_state(character_state)
+	character_state = new_state
+	_enter_state(character_state)
+	
+func _exit_state(state:CharacterState):
+	match state:
+		CharacterState.CHOP:
+			$ChopTimer.stop()
 
 func _enter_state(state: CharacterState):
-	pass
+	match state:
+		CharacterState.IDLE:
+			target = wait_spot.global_position
+			animation_player.play("IDLE")
+		CharacterState.MOVE_TO_TREE:
+			target = closest_tree.global_position
+			animation_player.play("RUN")
+		CharacterState.MOVE_TO_CRATE:
+			target = closest_crate.global_position
+			animation_player.play("CARRY")
+		CharacterState.CHOP:
+			animation_player.play("CHOP")
+			$ChopTimer.start()
+		CharacterState.DROP:
+			_drop()
+			_change_state(CharacterState.IDLE)
 	
 
 func _find_closest_tree():

@@ -15,7 +15,9 @@ var reached: bool = false
 
 enum CharacterState {
 	IDLE,
-	RUN,
+	MOVE_TO_TREE,
+	MOVE_TO_CRATE,
+	MOVE_TO_SPOT,
 	CHOP,
 	CARRY,
 	COLLECT,
@@ -42,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 @warning_ignore("shadowed_variable")
-func _move(target, speed):
+func _move(target, speed: int):
 	#print(speed)
 	self.position += self.position.direction_to(navigation_agent.get_next_path_position()) * get_physics_process_delta_time() * speed
 	navigation_agent.target_position = target
