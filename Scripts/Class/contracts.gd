@@ -11,12 +11,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Global.Contract1Accepted:
+	if Global.contract_won:
 		$Contracts.hide()
 		label1 = Label.new()
 		add_child(label1)
 		label1.position = Vector2(0, 20)
 		label1.text = "Lumber" + str(Global.goods_delivered) + "/" + str(goods_wanted)
 	else:
-		$No_Contracts.text = "No Contracts"
+		pass
+		#$No_Contracts.text = "No Contracts"
 		

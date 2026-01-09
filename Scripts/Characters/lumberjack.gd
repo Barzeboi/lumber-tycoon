@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 
 	$Label.text = str(inventory["Lumber"])
 	
-	match CharacterState:
+	match character_state:
 		CharacterState.IDLE:
 			if inventory["Lumber"] >= inventory_full:
 				if closest_crate == null:
@@ -33,78 +33,29 @@ func _process(delta: float) -> void:
 			if _reached():
 				_change_state(CharacterState.CHOP)
 		CharacterState.CHOP:
-			if closest_tree <= 0:
+			if closest_tree.health <= 0:
 				closest_tree._planted()
 				_change_state(CharacterState.IDLE)
 		CharacterState.MOVE_TO_CRATE:
 			if _reached():
 				_change_state(CharacterState.DROP)
 				
+	_animation_state(character_state)
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	if closest_tree == null and not Global.grown_trees.is_empty():
-		_find_closest_tree()
-	elif closest_crate != null and inventory["Lumber"] >= 10:
-		target = closest_crate.global_position
-	elif closest_tree != null:
-		target = closest_tree.global_position
-	elif closest_tree == null and inventory["Lumber"] > 0:
-		target = closest_crate.global_position
-	else:
-		target = wait_spot.global_position
-	
-	if closest_crate == null and not Global.crates.is_empty():
-		_find_closest_crate()
+	if target.x < global_position.x:
+		$Idle_Sprites.flip_h = true
+		$Run_sprites.flip_h = true
+		$Chop_Sprites.flip_h = true
+		$Carry_Sprites.flip_h = true
+	elif target.x > global_position.x:
+		$Idle_Sprites.flip_h = false
+		$Run_sprites.flip_h = false
+		$Chop_Sprites.flip_h = false
+		$Carry_Sprites.flip_h = false
 		
-	if is_moving == true and target != closest_crate.global_position:
-		character_state = CharacterState.RUN
-	elif is_moving == false and target == wait_spot.position:
-		character_state = CharacterState.IDLE
-	if closest_tree != null:
-		if is_moving == false and target == closest_tree.global_position:
-			character_state = CharacterState.CHOP
-	if closest_crate != null:
-		if is_moving == true and target == closest_crate.global_position:
-			character_state = CharacterState.CARRY
-		if target == closest_crate.global_position and self.position.distance_to(target) < 5:
-			character_state = CharacterState.DROP
-	
-	if target.x < self.global_position.x:
-		$idle_animation.flip_h = true
-		$run_animation.flip_h = true
-		$chop_animation.flip_h = true
-		$axe_animation.flip_h = true
-	elif target.x > self.global_position.x:
-		$idle_animation.flip_h = false
-		$run_animation.flip_h = false
-		$chop_animation.flip_h = false
-		$axe_animation.flip_h = false
-		
-	_character_state()
-	if closest_tree != null:
-		_tree_state()
-	
-
+	#_character_state()
+	#if closest_tree != null:
+		#_tree_state()
 	
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
@@ -119,21 +70,20 @@ func _physics_process(delta: float) -> void:
 			_move(global_position, 0)
 	if self.position.distance_to(target) <= 1:
 		_reached()
-	else:
-		is_moving = true
 
 
 	
 # (10/26/25) Idk why, but removing the "is_moving" line in the "_reached" function
 # although outwardly redundant, causes the character to behave oddly while trying to stop
 func _reached():
-	is_moving = false
+	return position.distance_to(target) < 1
 
 func _change_state(new_state: CharacterState):
 	if character_state == new_state: return
 	_exit_state(character_state)
 	character_state = new_state
 	_enter_state(character_state)
+	print(character_state)
 	
 func _exit_state(state:CharacterState):
 	match state:
@@ -152,11 +102,46 @@ func _enter_state(state: CharacterState):
 			target = closest_crate.global_position
 			animation_player.play("CARRY")
 		CharacterState.CHOP:
+			_chop()
 			animation_player.play("CHOP")
 			$ChopTimer.start()
 		CharacterState.DROP:
 			_drop()
 			_change_state(CharacterState.IDLE)
+			
+
+func _animation_state(state:CharacterState):
+	match state:
+		CharacterState.IDLE:
+			$Idle_Sprites.show()
+			$Run_sprites.hide()
+			$Carry_Sprites.hide()
+			$Chop_Sprites.hide()
+			animation_player.play("IDLE")
+		CharacterState.MOVE_TO_TREE:
+			$Run_sprites.show()
+			$Idle_Sprites.hide()
+			$Carry_Sprites.hide()
+			$Chop_Sprites.hide()
+			animation_player.play("RUN")
+		CharacterState.MOVE_TO_CRATE:
+			$Run_sprites.show()
+			$Idle_Sprites.hide()
+			$Carry_Sprites.hide()
+			$Chop_Sprites.hide()
+			animation_player.play("CARRY")
+		CharacterState.MOVE_TO_SPOT:
+			$Run_sprites.show()
+			$Idle_Sprites.hide()
+			$Carry_Sprites.hide()
+			$Chop_Sprites.hide()
+			animation_player.play("RUN")
+		CharacterState.CHOP:
+			$Run_sprites.hide()
+			$Idle_Sprites.hide()
+			$Carry_Sprites.hide()
+			$Chop_Sprites.show()
+			animation_player.play("CHOP")
 	
 
 func _find_closest_tree():
@@ -195,8 +180,8 @@ func _chop():
 	if closest_tree != null:
 		action_performed = true
 		$ChopTimer.start()
-		if animation_player.animation_finished and closest_tree.health > 0:
-			closest_tree._chop()
+		closest_tree._chop()
+		print("Le Chop")
 		
 
 func _carry():
@@ -207,47 +192,12 @@ func _drop():
 	inventory["Lumber"] -= inventory["Lumber"]
 	
 func _on_chop_timer_timeout() -> void:
-	action_performed = false
+	if character_state != CharacterState.CHOP:
+		return
+	if closest_tree:
+		closest_tree._chop()
+	_change_state(CharacterState.IDLE)
 	
-func _character_state():
-	match character_state:
-		CharacterState.RUN:
-			$run_animation.visible = true
-			$idle_animation.visible = false
-			$chop_animation.visible = false
-			$axe_animation.visible = false
-			$carry_animation.visible = false
-			$box_animation.visible = false
-			animation_player.play("RUN")
-		CharacterState.IDLE:
-			$idle_animation.visible = true
-			$run_animation.visible = false
-			$chop_animation.visible = false
-			$axe_animation.visible = false
-			$carry_animation.visible = false
-			$box_animation.visible = false
-			animation_player.play("IDLE")
-		CharacterState.CHOP:
-			$idle_animation.visible = false
-			$run_animation.visible = false
-			$chop_animation.visible = true
-			$axe_animation.visible = true
-			$carry_animation.visible = false
-			$box_animation.visible = false
-			if action_performed == false:
-				_chop()
-			animation_player.play("CHOP")
-		CharacterState.CARRY:
-			$idle_animation.visible = false
-			$run_animation.visible = false
-			$chop_animation.visible = false
-			$axe_animation.visible = false
-			$carry_animation.visible = true
-			$box_animation.visible = true
-			animation_player.play("CARRY")
-		CharacterState.DROP:
-			_drop()
-
 func _tree_state():
 		match closest_tree.state:
 			closest_tree.TreeState.CHOPPING:
