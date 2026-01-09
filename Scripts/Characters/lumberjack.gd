@@ -35,27 +35,24 @@ func _process(delta: float) -> void:
 		CharacterState.CHOP:
 			if closest_tree.health <= 0:
 				closest_tree._planted()
+				closest_tree = null
 				_change_state(CharacterState.IDLE)
 		CharacterState.MOVE_TO_CRATE:
 			if _reached():
 				_change_state(CharacterState.DROP)
 				
-	_animation_state(character_state)
+	
 	
 	if target.x < global_position.x:
-		$Idle_Sprites.flip_h = true
-		$Run_sprites.flip_h = true
-		$Chop_Sprites.flip_h = true
-		$Carry_Sprites.flip_h = true
+		$Idle_Sprites.scale.x = -1.0
+		$Run_sprites.scale.x = -1.0
+		$Chop_Sprites.scale.x = -1.0
+		$Carry_Sprites.scale.x = -1.0
 	elif target.x > global_position.x:
-		$Idle_Sprites.flip_h = false
-		$Run_sprites.flip_h = false
-		$Chop_Sprites.flip_h = false
-		$Carry_Sprites.flip_h = false
-		
-	#_character_state()
-	#if closest_tree != null:
-		#_tree_state()
+		$Idle_Sprites.scale.x = 1.0
+		$Run_sprites.scale.x = 1.0
+		$Chop_Sprites.scale.x = 1.0
+		$Carry_Sprites.scale.x = 1.0
 	
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
@@ -71,8 +68,6 @@ func _physics_process(delta: float) -> void:
 	if self.position.distance_to(target) <= 1:
 		_reached()
 
-
-	
 # (10/26/25) Idk why, but removing the "is_moving" line in the "_reached" function
 # although outwardly redundant, causes the character to behave oddly while trying to stop
 func _reached():
@@ -94,22 +89,21 @@ func _enter_state(state: CharacterState):
 	match state:
 		CharacterState.IDLE:
 			target = wait_spot.global_position
-			animation_player.play("IDLE")
+			_animation_state(character_state)
 		CharacterState.MOVE_TO_TREE:
 			target = closest_tree.global_position
-			animation_player.play("RUN")
+			_animation_state(character_state)
 		CharacterState.MOVE_TO_CRATE:
 			target = closest_crate.global_position
-			animation_player.play("CARRY")
+			_animation_state(character_state)
 		CharacterState.CHOP:
 			_chop()
-			animation_player.play("CHOP")
+			_animation_state(character_state)
 			$ChopTimer.start()
 		CharacterState.DROP:
 			_drop()
 			_change_state(CharacterState.IDLE)
 			
-
 func _animation_state(state:CharacterState):
 	match state:
 		CharacterState.IDLE:
@@ -125,9 +119,9 @@ func _animation_state(state:CharacterState):
 			$Chop_Sprites.hide()
 			animation_player.play("RUN")
 		CharacterState.MOVE_TO_CRATE:
-			$Run_sprites.show()
+			$Run_sprites.hide()
 			$Idle_Sprites.hide()
-			$Carry_Sprites.hide()
+			$Carry_Sprites.show()
 			$Chop_Sprites.hide()
 			animation_player.play("CARRY")
 		CharacterState.MOVE_TO_SPOT:
@@ -143,7 +137,6 @@ func _animation_state(state:CharacterState):
 			$Chop_Sprites.show()
 			animation_player.play("CHOP")
 	
-
 func _find_closest_tree():
 	var current_distance = 999999
 	closest_tree = null
@@ -174,16 +167,12 @@ func _find_closest_crate():
 				closest_crate = crate
 	return closest_crate
 	
-
-	
 func _chop():
 	if closest_tree != null:
 		action_performed = true
 		$ChopTimer.start()
 		closest_tree._chop()
-		print("Le Chop")
 		
-
 func _carry():
 	pass
 		
