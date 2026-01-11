@@ -331,7 +331,6 @@ libraries = {
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="idle_sprites" type="Node2D" parent="."]
-visible = false
 
 [node name="idle_animation" type="Sprite2D" parent="idle_sprites"]
 texture = ExtResource("1_o3l5m")
@@ -391,7 +390,7 @@ hframes = 5
 texture = ExtResource("13_m65m8")
 hframes = 5
 
-[node name="Timer" type="Timer" parent="."]
+[node name="watering_timer" type="Timer" parent="."]
 wait_time = 1.2
 one_shot = true
 
@@ -399,5 +398,5 @@ one_shot = true
 wait_time = 1.2
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="watering_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="planting_timer" to="." method="_on_planting_timer_timeout"]

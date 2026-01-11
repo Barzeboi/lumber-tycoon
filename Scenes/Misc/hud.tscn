@@ -8,6 +8,12 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_lwfba")
 
+[node name="Contracts" parent="." instance=ExtResource("4_wd7fq")]
+offset_left = 56.0
+offset_top = 74.0
+offset_right = 56.0
+offset_bottom = 74.0
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -34,11 +40,12 @@ text = "$0"
 z_index = -1
 layout_mode = 0
 offset_left = 53.0
-offset_top = 367.0
+offset_top = 365.0
 offset_right = 1100.0
 offset_bottom = 594.0
 tab_alignment = 1
 current_tab = 0
+deselect_enabled = true
 
 [node name="Characters" type="TabBar" parent="Control/TabContainer"]
 layout_mode = 2
@@ -56,8 +63,5 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Contracts" parent="." instance=ExtResource("4_wd7fq")]
-offset_left = 56.0
-offset_top = 74.0
-offset_right = 56.0
-offset_bottom = 74.0
+[connection signal="tab_clicked" from="Control/TabContainer" to="." method="_on_tab_container_tab_clicked"]
+[connection signal="pressed" from="Control/TabContainer/Characters/Button" to="." method="_on_button_pressed"]

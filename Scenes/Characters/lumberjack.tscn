@@ -1,16 +1,17 @@
-[gd_scene load_steps=34 format=3 uid="uid://eb8ou0sifl71"]
+[gd_scene load_steps=35 format=3 uid="uid://eb8ou0sifl71"]
 
 [ext_resource type="Script" uid="uid://h0nd5nr1v2kl" path="res://Scripts/Characters/lumberjack.gd" id="1_bafrk"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="2_by02f"]
 [ext_resource type="Texture2D" uid="uid://1vkcb0tyyr8o" path="res://Assets/Characters/base_walk_strip8.png" id="2_lnp7p"]
 [ext_resource type="Texture2D" uid="uid://du2t5g52wflcx" path="res://Assets/Characters/base_axe_strip10.png" id="4_s43xq"]
+[ext_resource type="Texture2D" uid="uid://vh5tdg1ct8ut" path="res://Assets/Characters/tools_run_strip8.png" id="5_geede"]
 [ext_resource type="Texture2D" uid="uid://dtta76ncf2bw4" path="res://Assets/Characters/tools_axe_strip10.png" id="5_v6ntj"]
 [ext_resource type="Texture2D" uid="uid://c1ah043ln2wks" path="res://Assets/Characters/base_carry_strip8.png" id="6_8cmg0"]
 [ext_resource type="Texture2D" uid="uid://pey6atpylqoo" path="res://Assets/Characters/tools_carry_strip8.png" id="7_jikwc"]
 [ext_resource type="Texture2D" uid="uid://byp8xw0hhisu1" path="res://Assets/Characters/tools_idle_strip9.png" id="8_jikwc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_by02f"]
-radius = 4.0
+radius = 7.2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5m43y"]
 atlas = ExtResource("2_by02f")
@@ -152,11 +153,12 @@ animations = [{
 [sub_resource type="Animation" id="Animation_8cmg0"]
 resource_name = "CARRY"
 length = 0.6
+loop_mode = 1
 step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("carry_animation:frame")
+tracks/0/path = NodePath("Carry_Sprites/carry_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -168,7 +170,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("box_animation:frame")
+tracks/1/path = NodePath("Carry_Sprites/box_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -186,7 +188,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("axe_animation:frame")
+tracks/0/path = NodePath("Chop_Sprites/axe_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -198,7 +200,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("chop_animation:frame")
+tracks/1/path = NodePath("Chop_Sprites/chop_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -216,7 +218,7 @@ step = 0.0667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("idle_animation:frame")
+tracks/0/path = NodePath("Idle_Sprites/idle_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -228,7 +230,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("arm_animation:frame")
+tracks/1/path = NodePath("Idle_Sprites/arm_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -243,7 +245,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("idle_animation:frame")
+tracks/0/path = NodePath("Idle_Sprites/idle_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -255,7 +257,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("run_animation:frame")
+tracks/1/path = NodePath("Run_sprites/run_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -267,7 +269,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("axe_animation:frame")
+tracks/2/path = NodePath("Chop_Sprites/axe_animation:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -279,7 +281,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("chop_animation:frame")
+tracks/3/path = NodePath("Chop_Sprites/chop_animation:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -291,7 +293,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("carry_animation:frame")
+tracks/4/path = NodePath("Carry_Sprites/carry_animation:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -303,7 +305,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("box_animation:frame")
+tracks/5/path = NodePath("Carry_Sprites/box_animation:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -315,10 +317,22 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("arm_animation:frame")
+tracks/6/path = NodePath("Idle_Sprites/arm_animation:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Run_sprites/run_arm_animation:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -329,14 +343,27 @@ tracks/6/keys = {
 resource_name = "RUN"
 length = 0.6
 loop_mode = 1
+step = 0.0833
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("run_animation:frame")
+tracks/0/path = NodePath("Run_sprites/run_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0833, 0.1667, 0.25, 0.3333, 0.4222, 0.5, 0.5889),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Run_sprites/run_arm_animation:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0833, 0.1666, 0.24990001, 0.3332, 0.4165, 0.49980003, 0.5831),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
@@ -377,39 +404,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_x7j7r")
 }
 
-[node name="idle_animation" type="Sprite2D" parent="."]
-texture = ExtResource("2_by02f")
-hframes = 9
-
-[node name="run_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_lnp7p")
-hframes = 8
-
-[node name="chop_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("4_s43xq")
-hframes = 10
-
-[node name="axe_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("5_v6ntj")
-hframes = 10
-
-[node name="carry_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("6_8cmg0")
-hframes = 8
-
-[node name="box_animation" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("7_jikwc")
-hframes = 8
-
-[node name="arm_animation" type="Sprite2D" parent="."]
-texture = ExtResource("8_jikwc")
-hframes = 9
-
 [node name="Label" type="Label" parent="."]
 offset_left = -8.0
 offset_top = -36.0
@@ -417,5 +411,56 @@ offset_right = 11.0
 offset_bottom = -13.0
 theme_override_font_sizes/font_size = 16
 text = "22"
+
+[node name="Idle_Sprites" type="Sprite2D" parent="."]
+
+[node name="idle_animation" type="Sprite2D" parent="Idle_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("2_by02f")
+hframes = 9
+
+[node name="arm_animation" type="Sprite2D" parent="Idle_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("8_jikwc")
+hframes = 9
+
+[node name="Run_sprites" type="Sprite2D" parent="."]
+visible = false
+
+[node name="run_animation" type="Sprite2D" parent="Run_sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("2_lnp7p")
+hframes = 8
+
+[node name="run_arm_animation" type="Sprite2D" parent="Run_sprites"]
+position = Vector2(1.5, 2)
+texture = ExtResource("5_geede")
+hframes = 8
+
+[node name="Carry_Sprites" type="Sprite2D" parent="."]
+visible = false
+
+[node name="carry_animation" type="Sprite2D" parent="Carry_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("6_8cmg0")
+hframes = 8
+
+[node name="box_animation" type="Sprite2D" parent="Carry_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("7_jikwc")
+hframes = 8
+
+[node name="Chop_Sprites" type="Sprite2D" parent="."]
+visible = false
+
+[node name="chop_animation" type="Sprite2D" parent="Chop_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("4_s43xq")
+hframes = 10
+
+[node name="axe_animation" type="Sprite2D" parent="Chop_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("5_v6ntj")
+hframes = 10
 
 [connection signal="timeout" from="ChopTimer" to="." method="_on_chop_timer_timeout"]
