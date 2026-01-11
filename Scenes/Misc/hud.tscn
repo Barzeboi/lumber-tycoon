@@ -45,6 +45,7 @@ offset_right = 1100.0
 offset_bottom = 594.0
 tab_alignment = 1
 current_tab = 0
+deselect_enabled = true
 
 [node name="Characters" type="TabBar" parent="Control/TabContainer"]
 layout_mode = 2
@@ -62,4 +63,5 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
+[connection signal="tab_clicked" from="Control/TabContainer" to="." method="_on_tab_container_tab_clicked"]
 [connection signal="pressed" from="Control/TabContainer/Characters/Button" to="." method="_on_button_pressed"]
