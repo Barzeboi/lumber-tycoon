@@ -12,58 +12,83 @@ func _process(delta: float) -> void:
 	navigation_agent.target_position = target
 	#print($planting_timer.time_left)
 	
-	if is_moving == true:
-		character_state = CharacterState.RUN
-	elif is_moving == false and target == wait_spot.global_position:
-		await get_tree().process_frame
-		character_state = CharacterState.IDLE
-	elif target == closest_crate.global_position and self.position.distance_to(target) < 1:
-		character_state = CharacterState.TAKE
-	if closest_tree != null:
-		if inventory["Seeds"] > 0:
-			if target == closest_tree.global_position and self.position.distance_to(target) < 1 and is_moving == false:
-				character_state = CharacterState.PLANT
+	match character_state:
+		CharacterState.IDLE:
+			if inventory["Seeds"] <= 0:
+				if !closest_crate:
+					_find_closest_crate()
+				else:
+					_change_state(CharacterState.MOVE_TO_CRATE)
+					
+			elif Global.chopped_trees.size() <= 0:
+				_change_state(CharacterState.MOVE_TO_SPOT)
+				
+			elif !closest_tree:
+				_find_closest_chopped_tree()
+			elif closest_tree:
+				_change_state(CharacterState.MOVE_TO_TREE)
+		CharacterState.MOVE_TO_TREE:
+			if _reached():
+				_change_state(CharacterState.PLANT)
+		CharacterState.MOVE_TO_CRATE:
+			if _reached():
+				_change_state(CharacterState.TAKE)
+		CharacterState.MOVE_TO_SPOT:
+			if _reached():
+				_change_state(CharacterState.IDLE)
 	
-	if closest_tree != null:
-		if inventory["Seeds"] < 1:
-			target = closest_crate.global_position
-		if inventory["Seeds"] >= 1:
-			target = closest_tree.global_position
-	if closest_tree == null:
-		if Global.chopped_trees.size() >= 1:
-			_find_closest_chopped_tree()
-		elif Global.chopped_trees.size() < 1 and Global.planted_trees.size() < 1:
-			target = wait_spot.global_position
-			
-	if closest_crate == null:
-		_find_closest_crate()
-	
-	if closest_crate != null:
-		if closest_crate.store["Seeds"] < 1:
-				target = wait_spot.global_position
-	
-	_character_state()
-	if closest_tree != null:
-		_tree_state()
-		
-	
+	_reached()
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	match character_state:
-		CharacterState.IDLE:
-			_move(target, 0)
-		CharacterState.RUN:
+		CharacterState.MOVE_TO_TREE, CharacterState.MOVE_TO_CRATE, CharacterState.MOVE_TO_SPOT:
 			_move(target, 70)
-		CharacterState.PLANT:
-			_move(target, 0)
+		_:
+			_move(global_position, 0)
 			
-	if self.position.distance_to(target) <= 1:
-		_reached()
-	else:
-		is_moving = true
+func _change_state(new_state:CharacterState):
+	if character_state == new_state: return
+	previous_state = character_state
+	_exit_state(character_state)
+	character_state = new_state
+	_enter_state(character_state)
+	
+func _exit_state(state: CharacterState):
+	match state:
+		CharacterState.PLANT:
+			$planting_timer.stop()
+		CharacterState.WATER:
+			$watering_timer.stop()
+
+func _enter_state(state: CharacterState):
+	match state:
+		CharacterState.IDLE:
+			target = global_position
+			_animation_state(character_state)
+		CharacterState.MOVE_TO_TREE:
+			target = closest_tree.global_position
+			_animation_state(character_state)
+		CharacterState.MOVE_TO_CRATE:
+			target = closest_crate.global_position
+			_animation_state(character_state)
+		CharacterState.MOVE_TO_SPOT:
+			target = wait_spot.global_position
+			_animation_state(character_state)
+		CharacterState.PLANT:
+			_plant()
+			$planting_timer.start()
+			_animation_state(character_state)
+		CharacterState.WATER:
+			_water()
+			_animation_state(character_state)
+			_change_state(CharacterState.IDLE)
+		CharacterState.TAKE:
+			_take()
+			_change_state(CharacterState.IDLE)
 		
 func _reached():
-	is_moving = false
+	return position.distance_to(target) < 5
+	
 	
 func _take():
 	take_amount = randi() % inventory_full + 1
@@ -74,10 +99,10 @@ func _plant():
 	if closest_tree != null:
 		print("plant")
 		inventory["Seeds"] -= 1
-		action_performed = true
-		$Timer.start()
 		$planting_timer.start()
-	
+		
+func _water():
+	pass
 	
 func _find_closest_chopped_tree():
 	var current_distance = 999999
@@ -106,15 +131,15 @@ func _find_closest_crate():
 				closest_crate = crate
 	return closest_crate
 	
-func _character_state():
-	match character_state:
+func _animation_state(state: CharacterState):
+	match state:
 		CharacterState.IDLE:
 			$idle_sprites.show()
 			$run_sprites.hide()
 			$doing_sprites.hide()
 			$watering_sprites.hide()
 			animation_player.play("IDLE")
-		CharacterState.RUN:
+		CharacterState.MOVE_TO_TREE,CharacterState.MOVE_TO_CRATE, CharacterState.MOVE_TO_SPOT:
 			$run_sprites.show()
 			$idle_sprites.hide()
 			$doing_sprites.hide()
@@ -126,30 +151,18 @@ func _character_state():
 			$idle_sprites.hide()
 			$watering_sprites.hide()
 			animation_player.play("DOING")
-			if closest_tree != null:
-				if closest_tree.state == closest_tree.TreeState.CHOPPED:
-					if action_performed == false:
-						if animation_player.animation_finished:
-							_plant()
-			
 		CharacterState.WATER:
 			$watering_sprites.show()
 			$run_sprites.hide()
 			$idle_sprites.hide()
 			$doing_sprites.hide()
 			animation_player.play("WATERING")
-		CharacterState.TAKE:
-			_take()
 
 func _on_timer_timeout() -> void:
 	action_performed = false
-	
-func _tree_state():
-	match closest_tree.state:
-		closest_tree.TreeState.PLANTED:
-			closest_tree = null
-
 
 func _on_planting_timer_timeout() -> void:
 	if closest_tree != null:
 		closest_tree._planted()
+		
+		_change_state(CharacterState.WATER)

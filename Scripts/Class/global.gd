@@ -6,7 +6,7 @@ extends Node
 @onready var chopped_trees = get_tree().get_nodes_in_group("Chopped_Trees")
 @onready var crates = get_tree().get_nodes_in_group("Crates")
 var contract
-var contract_won
+var contract_won = false
 var goods_delivered: int
 
 

@@ -17,7 +17,6 @@ config/features=PackedStringArray("4.5")
 [autoload]
 
 Global="*res://Scripts/Class/global.gd"
-Contracts="*res://Scripts/Class/contracts.gd"
 
 [display]
 
@@ -38,10 +37,7 @@ folder_colors={
 
 [layer_names]
 
-2d_physics/layer_1="World"
-2d_physics/layer_2="Characters"
-2d_physics/layer_3="Crates"
-2d_physics/layer_4="Trees"
+2d_physics/stretch/mode="disabled"
 
 [rendering]
 
