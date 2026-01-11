@@ -12,8 +12,7 @@ config_version=5
 
 config/name="Lumber Tycoon"
 run/main_scene="uid://bqu0cfhdbjlgv"
-config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.5")
 
 [autoload]
 
@@ -22,8 +21,7 @@ Contracts="*res://Scripts/Class/contracts.gd"
 
 [display]
 
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
@@ -32,8 +30,8 @@ enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
 [file_customization]
 
 folder_colors={
-"res://Assets/": "yellow",
-"res://Scenes/": "blue",
+"res://Assets/": "pink",
+"res://Scenes/": "purple",
 "res://Scripts/": "green",
 "res://addons/": "red"
 }
@@ -42,11 +40,10 @@ folder_colors={
 
 2d_physics/layer_1="World"
 2d_physics/layer_2="Characters"
-2d_physics/layer_3="Crate"
+2d_physics/layer_3="Crates"
 2d_physics/layer_4="Trees"
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

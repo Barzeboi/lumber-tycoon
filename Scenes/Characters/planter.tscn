@@ -1,30 +1,164 @@
-[gd_scene load_steps=21 format=3 uid="uid://l7qji6o80471"]
+[gd_scene load_steps=35 format=3 uid="uid://l7qji6o80471"]
 
-[ext_resource type="Script" uid="uid://dui1tio6voylo" path="res://Scripts/Characters/planter.gd" id="1_b21ok"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="1_o3l5m"]
+[ext_resource type="Script" uid="uid://h0nd5nr1v2kl" path="res://Scripts/Characters/lumberjack.gd" id="1_v0xmh"]
 [ext_resource type="Texture2D" uid="uid://1vkcb0tyyr8o" path="res://Assets/Characters/base_walk_strip8.png" id="2_a4vhm"]
-[ext_resource type="Texture2D" uid="uid://ch2gjinqdgsw3" path="res://Assets/Characters/base_doing_strip8.png" id="3_o76xi"]
-[ext_resource type="Texture2D" uid="uid://docm6ij1dx42l" path="res://Assets/Characters/curlyhair_doing_strip8.png" id="4_o8h04"]
 [ext_resource type="Texture2D" uid="uid://byp8xw0hhisu1" path="res://Assets/Characters/tools_idle_strip9.png" id="4_o76xi"]
-[ext_resource type="Texture2D" uid="uid://xrgtb488db4l" path="res://Assets/Characters/base_watering_strip5.png" id="4_w4i3h"]
 [ext_resource type="Texture2D" uid="uid://vh5tdg1ct8ut" path="res://Assets/Characters/tools_run_strip8.png" id="5_o76xi"]
-[ext_resource type="Texture2D" uid="uid://bi7e1o6vv2uin" path="res://Assets/Characters/curlyhair_run_strip8.png" id="6_v0xmh"]
-[ext_resource type="Texture2D" uid="uid://d2mnrqmne5j7q" path="res://Assets/Characters/tools_doing_strip8.png" id="7_8q8h8"]
-[ext_resource type="Texture2D" uid="uid://gr34r36glf0p" path="res://Assets/Characters/curlyhair_idle_strip9.png" id="7_o8h04"]
-[ext_resource type="Texture2D" uid="uid://i11iap1xnjvc" path="res://Assets/Characters/tools_watering_strip5.png" id="8_b21ok"]
-[ext_resource type="Texture2D" uid="uid://07dyjivco7nh" path="res://Assets/Characters/curlyhair_watering_strip5.png" id="13_m65m8"]
+[ext_resource type="Texture2D" uid="uid://c1ah043ln2wks" path="res://Assets/Characters/base_carry_strip8.png" id="6_o8h04"]
+[ext_resource type="Texture2D" uid="uid://pey6atpylqoo" path="res://Assets/Characters/tools_carry_strip8.png" id="7_8q8h8"]
+[ext_resource type="Texture2D" uid="uid://du2t5g52wflcx" path="res://Assets/Characters/base_axe_strip10.png" id="8_krfrc"]
+[ext_resource type="Texture2D" uid="uid://dtta76ncf2bw4" path="res://Assets/Characters/tools_axe_strip10.png" id="9_w4i3h"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o76xi"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_by02f"]
+radius = 7.2
 
-[sub_resource type="Animation" id="Animation_v0xmh"]
-resource_name = "DOING"
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m43y"]
+atlas = ExtResource("1_o3l5m")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybi7a"]
+atlas = ExtResource("1_o3l5m")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2kwt"]
+atlas = ExtResource("1_o3l5m")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_excwy"]
+atlas = ExtResource("1_o3l5m")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koj78"]
+atlas = ExtResource("1_o3l5m")
+region = Rect2(384, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2ou3"]
+atlas = ExtResource("1_o3l5m")
+region = Rect2(480, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18ocw"]
+atlas = ExtResource("1_o3l5m")
+region = Rect2(576, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7f4s"]
+atlas = ExtResource("1_o3l5m")
+region = Rect2(672, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fimep"]
+atlas = ExtResource("1_o3l5m")
+region = Rect2(768, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_by02f"]
+atlas = ExtResource("2_a4vhm")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s43xq"]
+atlas = ExtResource("2_a4vhm")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6ntj"]
+atlas = ExtResource("2_a4vhm")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7j7r"]
+atlas = ExtResource("2_a4vhm")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cmg0"]
+atlas = ExtResource("2_a4vhm")
+region = Rect2(384, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jikwc"]
+atlas = ExtResource("2_a4vhm")
+region = Rect2(480, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_geede"]
+atlas = ExtResource("2_a4vhm")
+region = Rect2(576, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvnmb"]
+atlas = ExtResource("2_a4vhm")
+region = Rect2(672, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5m43y"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m43y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybi7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2kwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_excwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koj78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2ou3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18ocw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7f4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fimep")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 13.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_by02f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s43xq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6ntj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7j7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cmg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jikwc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_geede")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvnmb")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_8cmg0"]
+resource_name = "CARRY"
 length = 0.6
 loop_mode = 1
 step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("doing_sprites/doing_animation:frame")
+tracks/0/path = NodePath("Carry_Sprites/carry_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -36,7 +170,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("doing_sprites/hair_doing:frame")
+tracks/1/path = NodePath("Carry_Sprites/box_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -45,20 +179,38 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("doing_sprites/doing_arm_animation:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+
+[sub_resource type="Animation" id="Animation_x7j7r"]
+resource_name = "CHOP"
+length = 0.6
+loop_mode = 1
+step = 0.075
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Chop_Sprites/axe_animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Chop_Sprites/chop_animation:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 
-[sub_resource type="Animation" id="Animation_8q8h8"]
+[sub_resource type="Animation" id="Animation_by02f"]
 resource_name = "IDLE"
 length = 0.6
 loop_mode = 1
@@ -66,11 +218,11 @@ step = 0.0667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("idle_sprites/idle_animation:frame")
+tracks/0/path = NodePath("Idle_Sprites/idle_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0667, 0.1334, 0.20009999, 0.2668, 0.33349997, 0.40019998, 0.4669, 0.5336),
+"times": PackedFloat32Array(0, 0.069993, 0.1399745, 0.20998994, 0.28, 0.35, 0.42, 0.49, 0.56),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -78,34 +230,22 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("idle_sprites/hair_idle:frame")
+tracks/1/path = NodePath("Idle_Sprites/arm_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0667, 0.1334, 0.20009999, 0.2668, 0.33349997, 0.40019998, 0.4669, 0.5336),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("idle_sprites/arm_animation:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.0667, 0.1334, 0.20009999, 0.2668, 0.33349997, 0.40019998, 0.4669, 0.5336),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
-[sub_resource type="Animation" id="Animation_krfrc"]
+[sub_resource type="Animation" id="Animation_s43xq"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("idle_sprites/idle_animation:frame")
+tracks/0/path = NodePath("Idle_Sprites/idle_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -117,7 +257,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("idle_sprites/hair_idle:frame")
+tracks/1/path = NodePath("Run_sprites/run_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -129,7 +269,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("idle_sprites/arm_animation:frame")
+tracks/2/path = NodePath("Chop_Sprites/axe_animation:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -141,7 +281,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("run_sprites/run_animation:frame")
+tracks/3/path = NodePath("Chop_Sprites/chop_animation:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -153,7 +293,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("run_sprites/run_arm_animation:frame")
+tracks/4/path = NodePath("Carry_Sprites/carry_animation:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -165,7 +305,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("doing_sprites/doing_animation:frame")
+tracks/5/path = NodePath("Carry_Sprites/box_animation:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -177,7 +317,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("doing_sprites/hair_doing:frame")
+tracks/6/path = NodePath("Idle_Sprites/arm_animation:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -189,7 +329,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("doing_sprites/doing_arm_animation:frame")
+tracks/7/path = NodePath("Run_sprites/run_arm_animation:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -198,56 +338,20 @@ tracks/7/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("watering_sprites/watering_animation:frame")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("watering_sprites/hair_watering:frame")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("watering_sprites/watering_arm_animation:frame")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
-[sub_resource type="Animation" id="Animation_jq8ka"]
+[sub_resource type="Animation" id="Animation_v6ntj"]
 resource_name = "RUN"
 length = 0.6
 loop_mode = 1
-step = 0.075
+step = 0.0833
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("run_sprites/run_animation:frame")
+tracks/0/path = NodePath("Run_sprites/run_animation:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"times": PackedFloat32Array(0, 0.0833, 0.1667, 0.25, 0.3333, 0.4222, 0.5, 0.5889),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
@@ -255,149 +359,108 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("run_sprites/run_arm_animation:frame")
+tracks/1/path = NodePath("Run_sprites/run_arm_animation:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.52500004),
+"times": PackedFloat32Array(0, 0.0833, 0.1666, 0.24990001, 0.3332, 0.4165, 0.49980003, 0.5831),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_kcwyw"]
-resource_name = "WATERING"
-length = 0.6
-loop_mode = 1
-step = 0.12
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("watering_sprites/watering_animation:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.35999998, 0.48),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("watering_sprites/hair_watering:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.35999998, 0.48),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("watering_sprites/watering_arm_animation:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.35999998, 0.48),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4i3h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7j7r"]
 _data = {
-&"DOING": SubResource("Animation_v0xmh"),
-&"IDLE": SubResource("Animation_8q8h8"),
-&"RESET": SubResource("Animation_krfrc"),
-&"RUN": SubResource("Animation_jq8ka"),
-&"WATERING": SubResource("Animation_kcwyw")
+&"CARRY": SubResource("Animation_8cmg0"),
+&"CHOP": SubResource("Animation_x7j7r"),
+&"IDLE": SubResource("Animation_by02f"),
+&"RESET": SubResource("Animation_s43xq"),
+&"RUN": SubResource("Animation_v6ntj")
 }
 
-[node name="Planter" type="CharacterBody2D"]
+[node name="Lumberjack" type="CharacterBody2D"]
 scale = Vector2(1.25, 1.25)
-script = ExtResource("1_b21ok")
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_v0xmh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_o76xi")
+shape = SubResource("CircleShape2D_by02f")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_5m43y")
+animation = &"walk"
+
+[node name="ChopTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_w4i3h")
+&"": SubResource("AnimationLibrary_x7j7r")
 }
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="Label" type="Label" parent="."]
+offset_left = -8.0
+offset_top = -36.0
+offset_right = 11.0
+offset_bottom = -13.0
+theme_override_font_sizes/font_size = 16
+text = "22"
 
-[node name="idle_sprites" type="Node2D" parent="."]
-visible = false
+[node name="Idle_Sprites" type="Sprite2D" parent="."]
 
-[node name="idle_animation" type="Sprite2D" parent="idle_sprites"]
+[node name="idle_animation" type="Sprite2D" parent="Idle_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("1_o3l5m")
 hframes = 9
 
-[node name="arm_animation" type="Sprite2D" parent="idle_sprites"]
+[node name="arm_animation" type="Sprite2D" parent="Idle_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("4_o76xi")
 hframes = 9
 
-[node name="hair_idle" type="Sprite2D" parent="idle_sprites"]
-texture = ExtResource("7_o8h04")
-hframes = 9
-
-[node name="run_sprites" type="Node2D" parent="."]
+[node name="Run_sprites" type="Sprite2D" parent="."]
 visible = false
 
-[node name="run_animation" type="Sprite2D" parent="run_sprites"]
+[node name="run_animation" type="Sprite2D" parent="Run_sprites"]
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("2_a4vhm")
 hframes = 8
 
-[node name="run_arm_animation" type="Sprite2D" parent="run_sprites"]
-position = Vector2(2, 2)
+[node name="run_arm_animation" type="Sprite2D" parent="Run_sprites"]
+position = Vector2(1.5, 2)
 texture = ExtResource("5_o76xi")
 hframes = 8
 
-[node name="hair_run" type="Sprite2D" parent="run_sprites"]
-texture = ExtResource("6_v0xmh")
-hframes = 8
-
-[node name="doing_sprites" type="Node2D" parent="."]
+[node name="Carry_Sprites" type="Sprite2D" parent="."]
 visible = false
 
-[node name="doing_animation" type="Sprite2D" parent="doing_sprites"]
-texture = ExtResource("3_o76xi")
+[node name="carry_animation" type="Sprite2D" parent="Carry_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("6_o8h04")
 hframes = 8
 
-[node name="hair_doing" type="Sprite2D" parent="doing_sprites"]
-texture = ExtResource("4_o8h04")
-hframes = 8
-
-[node name="doing_arm_animation" type="Sprite2D" parent="doing_sprites"]
+[node name="box_animation" type="Sprite2D" parent="Carry_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("7_8q8h8")
 hframes = 8
 
-[node name="watering_sprites" type="Node2D" parent="."]
+[node name="Chop_Sprites" type="Sprite2D" parent="."]
 visible = false
 
-[node name="watering_animation" type="Sprite2D" parent="watering_sprites"]
-texture = ExtResource("4_w4i3h")
-hframes = 5
+[node name="chop_animation" type="Sprite2D" parent="Chop_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("8_krfrc")
+hframes = 10
 
-[node name="watering_arm_animation" type="Sprite2D" parent="watering_sprites"]
-texture = ExtResource("8_b21ok")
-hframes = 5
+[node name="axe_animation" type="Sprite2D" parent="Chop_Sprites"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("9_w4i3h")
+hframes = 10
 
-[node name="hair_watering" type="Sprite2D" parent="watering_sprites"]
-texture = ExtResource("13_m65m8")
-hframes = 5
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 1.2
-one_shot = true
-
-[node name="planting_timer" type="Timer" parent="."]
-wait_time = 1.2
-one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="planting_timer" to="." method="_on_planting_timer_timeout"]
+[connection signal="timeout" from="ChopTimer" to="." method="_on_chop_timer_timeout"]
