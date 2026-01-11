@@ -57,12 +57,10 @@ func _process(delta: float) -> void:
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	match character_state:
-		CharacterState.MOVE_TO_TREE:
+		CharacterState.MOVE_TO_TREE, CharacterState.MOVE_TO_SPOT:
 			_move(target, 70)
 		CharacterState.MOVE_TO_CRATE:
 			_move(target, 50)
-		CharacterState.MOVE_TO_SPOT:
-			_move(target, 70)
 		_:
 			_move(global_position, 0)
 	if self.position.distance_to(target) <= 1:
@@ -78,7 +76,6 @@ func _change_state(new_state: CharacterState):
 	_exit_state(character_state)
 	character_state = new_state
 	_enter_state(character_state)
-	print(character_state)
 	
 func _exit_state(state:CharacterState):
 	match state:
