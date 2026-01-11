@@ -27,6 +27,22 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Assets/": "pink",
+"res://Scenes/": "purple",
+"res://Scripts/": "green",
+"res://addons/": "red"
+}
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Characters"
+2d_physics/layer_3="Crates"
+2d_physics/layer_4="Trees"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
