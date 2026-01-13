@@ -3,6 +3,7 @@ extends Character
 var inventory_full = 10
 var inventory: Dictionary = {"Lumber": 0}
 var currentspeed
+var base_cost = 900
 
 func _ready() -> void:
 	pass

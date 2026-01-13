@@ -6,6 +6,8 @@ var placer
 var item_selected: bool = false
 var mouse_pos: Vector2
 var placer_texture: CompressedTexture2D = preload("res://Assets/Characters/base_idle_strip9.png")
+var lumberjack: PackedScene = preload("res://Scenes/Characters/lumberjack.tscn")
+@onready var wait_spot: Marker2D = $"../wait_spot"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -20,15 +22,17 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	pass
 
-func _on_button_pressed() -> void:
+func _on_tab_container_tab_clicked(tab: int) -> void:
+	$Control/TabContainer.position.y = Tab_max
+
+func _on_lumberjack_button_pressed() -> void:
 	$Control/TabContainer.position.y = Tab_min
 	$Control/TabContainer.current_tab = -1
 	if is_instance_valid(placer):
 		_delete_placement_visualizer()
 	_create_placement_visualizer(placer_texture)
-
-func _on_tab_container_tab_clicked(tab: int) -> void:
-	$Control/TabContainer.position.y = Tab_max
+	_spawn(lumberjack)
+	
 
 func _create_placement_visualizer(visual: CompressedTexture2D):
 	placer = Sprite2D.new()
@@ -41,3 +45,8 @@ func _create_placement_visualizer(visual: CompressedTexture2D):
 	
 func _delete_placement_visualizer():
 		placer.free()
+		
+func _spawn(instance:PackedScene):
+	var spawn = instance.instantiate()
+	spawn.global_position = wait_spot.global_position
+	owner.add_child(spawn)
