@@ -14,23 +14,30 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	mouse_pos = get_viewport().get_mouse_position()
+	if is_instance_valid(placer):
+		placer.position = mouse_pos
 	
 func _physics_process(delta: float) -> void:
-		pass
+	pass
 
 func _on_button_pressed() -> void:
 	$Control/TabContainer.position.y = Tab_min
 	$Control/TabContainer.current_tab = -1
+	if is_instance_valid(placer):
+		_delete_placement_visualizer()
 	_create_placement_visualizer(placer_texture)
 
 func _on_tab_container_tab_clicked(tab: int) -> void:
 	$Control/TabContainer.position.y = Tab_max
 
-func _create_placement_visualizer(visual: Sprite2D):
+func _create_placement_visualizer(visual: CompressedTexture2D):
 	placer = Sprite2D.new()
 	add_child(placer)
-	placer.position = mouse_pos
-	visual.hframes = 9
-	visual.vframes = 1
-	visual.frame = 0
-	visual.self_modulate = Color(255.014, 255.014, 255.014, 0.482)
+	placer.texture = visual
+	placer.hframes = 9
+	placer.vframes = 1
+	placer.frame = 0
+	placer.self_modulate = Color(255.014, 255.014, 255.014, 0.525)
+	
+func _delete_placement_visualizer():
+		placer.free()

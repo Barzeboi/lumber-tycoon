@@ -1,12 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://bqu0cfhdbjlgv"]
+[gd_scene load_steps=9 format=4 uid="uid://bqu0cfhdbjlgv"]
 
 [ext_resource type="PackedScene" uid="uid://cjco0yefdo48s" path="res://Scenes/Misc/hud.tscn" id="1_7staa"]
 [ext_resource type="Texture2D" uid="uid://gv0804cpg6pu" path="res://Assets/Tiles/spr_tileset_sunnysideworld_16px.png" id="1_t1gg8"]
 [ext_resource type="PackedScene" uid="uid://dr4gwalvmpqp6" path="res://Scenes/Misc/wait_spot.tscn" id="3_3rhlx"]
-[ext_resource type="PackedScene" uid="uid://eb8ou0sifl71" path="res://Scenes/Characters/lumberjack.tscn" id="4_vadfg"]
 [ext_resource type="PackedScene" uid="uid://7n8lqpxeev33" path="res://Scenes/Misc/tree_plot.tscn" id="5_adcqc"]
 [ext_resource type="PackedScene" uid="uid://d153gy5d61ieg" path="res://Scenes/Misc/crate.tscn" id="5_l1hd3"]
-[ext_resource type="PackedScene" uid="uid://l7qji6o80471" path="res://Scenes/Characters/planter.tscn" id="7_7staa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yp2ti"]
 texture = ExtResource("1_t1gg8")
@@ -1775,12 +1773,6 @@ position = Vector2(89, 103)
 
 [node name="Crate" parent="." instance=ExtResource("5_l1hd3")]
 position = Vector2(507, 115)
-
-[node name="Lumberjack" parent="." instance=ExtResource("4_vadfg")]
-position = Vector2(492, 229)
-
-[node name="Planter" parent="." instance=ExtResource("7_7staa")]
-position = Vector2(487, 321)
 
 [node name="wait_spot" parent="." instance=ExtResource("3_3rhlx")]
 position = Vector2(633, 102)

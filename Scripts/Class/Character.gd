@@ -13,7 +13,7 @@ var is_moving: bool = false
 var action_performed: bool = false
 var reached: bool = false
 
-enum CharacterState {
+enum CharacterState{
 	IDLE,
 	MOVE_TO_TREE,
 	MOVE_TO_CRATE,

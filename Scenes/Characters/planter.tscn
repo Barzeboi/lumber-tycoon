@@ -331,6 +331,7 @@ libraries = {
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="idle_sprites" type="Node2D" parent="."]
+texture_filter = 1
 
 [node name="idle_animation" type="Sprite2D" parent="idle_sprites"]
 texture = ExtResource("1_o3l5m")
@@ -346,6 +347,7 @@ hframes = 9
 
 [node name="run_sprites" type="Node2D" parent="."]
 visible = false
+texture_filter = 1
 
 [node name="run_animation" type="Sprite2D" parent="run_sprites"]
 texture = ExtResource("2_a4vhm")
@@ -362,6 +364,7 @@ hframes = 8
 
 [node name="doing_sprites" type="Node2D" parent="."]
 visible = false
+texture_filter = 1
 
 [node name="doing_animation" type="Sprite2D" parent="doing_sprites"]
 texture = ExtResource("3_o76xi")
@@ -377,6 +380,7 @@ hframes = 8
 
 [node name="watering_sprites" type="Node2D" parent="."]
 visible = false
+texture_filter = 1
 
 [node name="watering_animation" type="Sprite2D" parent="watering_sprites"]
 texture = ExtResource("4_w4i3h")
