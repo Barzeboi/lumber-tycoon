@@ -10,13 +10,14 @@ var lumberjack: PackedScene = preload("res://Scenes/Characters/lumberjack.tscn")
 @onready var wait_spot: Marker2D = $"../wait_spot"
 
 enum Selected_Purchaseable {
+	NONE,
 	LUMBERJACK,
 	PLANTER,
 	COURIER,
 	LUMBERMILL
 }
 
-var currently_seletected: Selected_Purchaseable = Selected_Purchaseable.LUMBERJACK
+var currently_seletected: Selected_Purchaseable = Selected_Purchaseable.NONE
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -45,6 +46,8 @@ func _on_lumberjack_button_pressed() -> void:
 	if is_instance_valid(placer):
 		_delete_placement_visualizer()
 	_create_placement_visualizer(placer_texture)
+	currently_seletected = Selected_Purchaseable.LUMBERJACK
+	
 	
 
 func _create_placement_visualizer(visual: CompressedTexture2D):
@@ -61,7 +64,6 @@ func _delete_placement_visualizer():
 		
 func _spawn(instance:PackedScene):
 	if is_instance_valid(instance):
-		await get_tree().process_frame
 		var spawn = instance.instantiate()
 		spawn.global_position = mouse_pos
 		owner.add_child(spawn)
