@@ -12,6 +12,7 @@ var closest_crate = null
 var is_moving: bool = false
 var action_performed: bool = false
 var reached: bool = false
+signal newly_purchased
 
 enum CharacterState{
 	IDLE,
@@ -35,6 +36,9 @@ enum CharacterState{
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
+
+func _init() -> void:
+	newly_purchased.emit()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

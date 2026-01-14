@@ -3,7 +3,9 @@ extends Character
 var inventory_full = 10
 var inventory: Dictionary = {"Lumber": 0}
 var currentspeed
+var level = 1
 var base_cost = 900
+@export var cost = 900
 
 func _ready() -> void:
 	pass

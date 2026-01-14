@@ -26,7 +26,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_8leah")
 
-[node name="Label" type="Label" parent="Control/TextureRect"]
+[node name="AvailableCash" type="Label" parent="Control/TextureRect"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 125.0
@@ -36,7 +36,7 @@ offset_bottom = 58.0
 theme_override_font_sizes/font_size = 32
 text = "$0"
 
-[node name="Label2" type="Label" parent="Control/TextureRect"]
+[node name="ProfDef" type="Label" parent="Control/TextureRect"]
 layout_mode = 0
 offset_left = 246.0
 offset_top = 13.0
