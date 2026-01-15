@@ -14,7 +14,7 @@ atlas = ExtResource("1_bxoy8")
 region = Rect2(512.0364, 80.35245, 16.123291, 15.911552)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f27wv"]
-size = Vector2(6, 6)
+size = Vector2(9.599999, 9.599999)
 
 [node name="Tree" type="StaticBody2D"]
 scale = Vector2(1.25, 1.25)
@@ -48,6 +48,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TreeArea"]
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_f27wv")
 
 [connection signal="body_entered" from="TreeArea" to="." method="_on_tree_area_body_entered"]

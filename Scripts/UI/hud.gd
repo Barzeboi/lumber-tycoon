@@ -3,12 +3,12 @@ extends CanvasLayer
 var Tab_min: float = 565.0
 var Tab_max: float = 365.0
 var placer
-var character: Character = Character.new()
 var item_selected: bool = false
 var mouse_pos: Vector2
+var previous_amount: float
+var total_amount: float
 var placer_texture: CompressedTexture2D = preload("res://Assets/Characters/base_idle_strip9.png")
 var lumberjack: PackedScene = preload("res://Scenes/Characters/lumberjack.tscn")
-var lumberjackscript = load("res://Scripts/Characters/lumberjack.gd")
 @onready var wait_spot: Marker2D = $"../wait_spot"
 
 enum Selected_Purchaseable {
@@ -22,7 +22,8 @@ enum Selected_Purchaseable {
 var currently_seletected: Selected_Purchaseable = Selected_Purchaseable.NONE
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	character.newly_purchased.connect(_purchase)
+	Events.connect("purchase", _purchase)
+	$Control/TextureRect/AvailableCash.text = "$" + str(Global.cash)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,9 +72,8 @@ func _spawn(instance:PackedScene):
 		owner.add_child(spawn)
 				
 func _purchase(amount: float):
-	match currently_seletected:
-		Selected_Purchaseable.LUMBERJACK:
-			pass
+	total_amount = previous_amount + amount
+	previous_amount = total_amount
 	Global.cash -= amount
-	$Control/TextureRect/AvailableCash.text = str(Global.cash)
-	$Control/TextureRect/ProfDef.text = str(amount)
+	$Control/TextureRect/AvailableCash.text = "$" + str(Global.cash)
+	$Control/TextureRect/ProfDef.text = "$" + str(total_amount)

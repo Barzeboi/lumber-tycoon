@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.5")
 
 Global="*res://Scripts/Class/global.gd"
 Contracts="*res://Scripts/Class/contracts.gd"
+Events="*res://Scripts/Class/events.gd"
 
 [display]
 

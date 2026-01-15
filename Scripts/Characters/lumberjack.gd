@@ -7,6 +7,9 @@ var level = 1
 var base_cost = 900
 @export var cost = 900
 
+func _init() -> void:
+	Events.emit_signal("purchase", cost)
+
 func _ready() -> void:
 	pass
 	
@@ -76,6 +79,7 @@ func _reached():
 
 func _change_state(new_state: CharacterState):
 	if character_state == new_state: return
+	$CollisionShape2D.disabled = false
 	_exit_state(character_state)
 	character_state = new_state
 	_enter_state(character_state)
@@ -93,9 +97,11 @@ func _enter_state(state: CharacterState):
 		CharacterState.MOVE_TO_TREE:
 			target = closest_tree.global_position
 			_animation_state(character_state)
+			$CollisionShape2D.disabled = true
 		CharacterState.MOVE_TO_CRATE:
 			target = closest_crate.global_position
 			_animation_state(character_state)
+			$CollisionShape2D.disabled = true
 		CharacterState.CHOP:
 			_chop()
 			_animation_state(character_state)
