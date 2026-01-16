@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-
+var materials: Materials = Materials.new()
 var chopper
 signal statechanged
 signal done_chopping
@@ -11,14 +11,14 @@ enum TreeState {
 	CHOPPING,
 	CHOPPED
 }
-
 @export var state: TreeState = TreeState.GROWN
-@onready var chop_spot: Marker2D = $chop_spot
 var health = 8
 var full_health = 8
 var chopped = false
 var chopping = false
 var watered = false
+@onready var lumber = materials.Lumber
+@onready var spawn_points = [$SpawnHolder/lumber_spawn.position, $SpawnHolder/lumber_spawn2.position, $SpawnHolder/lumber_spawn3.position, $SpawnHolder/lumber_spawn4.position, $SpawnHolder/lumber_spawn5.position]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,10 +30,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
-	if health <= 0 and chopped != true:
-		chopper.inventory["Lumber"] += randi_range(1,5)
-		chopped = true
-		chopping = false
+	
 	
 	if chopped == true:
 		state = TreeState.CHOPPED
@@ -55,6 +52,11 @@ func _planted():
 	#print(name + ": " + str(state))
 	statechanged.emit()
 
+func _spawn():
+	for positions in spawn_points:
+		var new_log = lumber.instantiate()
+		new_log.global_position = position
+		owner.add_child(new_log)
 
 func _tree_state():
 	match state:
@@ -76,7 +78,7 @@ func _tree_state():
 			$CollisionShape2D.disabled = true
 			$GrownSprite.visible = false
 			$ChoppedSprite.visible = true
-			chopper = null
+			_spawn()
 			done_chopping.emit()
 
 func _on_tree_area_body_entered(body: Node2D) -> void:

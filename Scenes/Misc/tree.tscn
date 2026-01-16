@@ -26,9 +26,6 @@ script = ExtResource("1_88vw5")
 position = Vector2(-20, 0)
 shape = SubResource("CircleShape2D_88vw5")
 
-[node name="chop_spot" type="Marker2D" parent="."]
-position = Vector2(20, 0)
-
 [node name="GrownSprite" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-20, -12)
@@ -50,6 +47,28 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TreeArea"]
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_f27wv")
+
+[node name="SpawnHolder" type="Node2D" parent="."]
+
+[node name="lumber_spawn" type="Marker2D" parent="SpawnHolder"]
+position = Vector2(-20, 15.199999)
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="lumber_spawn2" type="Marker2D" parent="SpawnHolder"]
+position = Vector2(-4.800003, 11.200005)
+scale = Vector2(0.99999976, 0.99999976)
+
+[node name="lumber_spawn3" type="Marker2D" parent="SpawnHolder"]
+position = Vector2(-4.8, -10.400001)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="lumber_spawn4" type="Marker2D" parent="SpawnHolder"]
+position = Vector2(-20, -14.4)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="lumber_spawn5" type="Marker2D" parent="SpawnHolder"]
+position = Vector2(-7.2000003, 0)
+scale = Vector2(0.99999994, 0.99999994)
 
 [connection signal="body_entered" from="TreeArea" to="." method="_on_tree_area_body_entered"]
 [connection signal="body_exited" from="TreeArea" to="." method="_on_tree_area_body_exited"]
