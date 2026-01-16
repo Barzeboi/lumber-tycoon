@@ -12,6 +12,7 @@ enum TreeState {
 	CHOPPED
 }
 @export var state: TreeState = TreeState.GROWN
+@export var previous_state: TreeState
 var health = 8
 var full_health = 8
 var chopped = false
@@ -51,6 +52,26 @@ func _planted():
 	chopped = false
 	#print(name + ": " + str(state))
 	statechanged.emit()
+	
+func _change_state(new_state: TreeState):
+	if state == new_state: return
+	previous_state = state
+	_exit_state(state)
+	state = new_state
+	_enter_state(state)
+	
+	
+func _exit_state(state:TreeState):
+	match state:
+		TreeState.CHOPPING:
+			chopping = false
+		TreeState.CHOPPED:
+			chopped = false
+
+func _enter_state(state:TreeState):
+	match state:
+		TreeState.GROWN:
+			health = full_health
 
 func _spawn():
 	for positions in spawn_points:
