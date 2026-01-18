@@ -51,22 +51,27 @@ shape = SubResource("RectangleShape2D_f27wv")
 [node name="SpawnHolder" type="Node2D" parent="."]
 
 [node name="lumber_spawn" type="Marker2D" parent="SpawnHolder"]
+visible = false
 position = Vector2(-20, 15.199999)
 scale = Vector2(0.9999998, 0.9999998)
 
 [node name="lumber_spawn2" type="Marker2D" parent="SpawnHolder"]
+visible = false
 position = Vector2(-4.800003, 11.200005)
 scale = Vector2(0.99999976, 0.99999976)
 
 [node name="lumber_spawn3" type="Marker2D" parent="SpawnHolder"]
+visible = false
 position = Vector2(-4.8, -10.400001)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="lumber_spawn4" type="Marker2D" parent="SpawnHolder"]
+visible = false
 position = Vector2(-20, -14.4)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="lumber_spawn5" type="Marker2D" parent="SpawnHolder"]
+visible = false
 position = Vector2(-7.2000003, 0)
 scale = Vector2(0.99999994, 0.99999994)
 

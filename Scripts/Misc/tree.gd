@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 			if chopping == true:
 				_change_state(TreeState.CHOPPING)
 		TreeState.CHOPPING:
-			if health >= 0:
+			if health <= 0:
 				_change_state(TreeState.CHOPPED)
 		TreeState.CHOPPED:
 			if planted == true:
@@ -60,7 +60,6 @@ func _enter_state(s:TreeState):
 			add_to_group("Grown_Trees")
 			_animation_state(state)
 		TreeState.CHOPPING:
-			chopping = true
 			_animation_state(state)
 		TreeState.CHOPPED:
 			chopped = true
@@ -76,9 +75,11 @@ func _enter_state(s:TreeState):
 			$planted_timer.start()
 			_animation_state(state)
 	
-func _chop(damage: float):
-	health -= damage
-	chopping = true
+func _chop(id, damage: float):
+	var instanceid = get_instance_id()
+	if is_same(id,instanceid):
+		health -= damage
+		chopping = true
 	
 func _planted():
 	health = full_health
@@ -98,7 +99,7 @@ func _spawn():
 	for positions in spawn_points:
 		var new_log = lumber.instantiate()
 		new_log.global_position = positions
-		owner.add_child(new_log)
+		owner.owner.add_child(new_log)
 
 func _animation_state(s:TreeState):
 	match s:

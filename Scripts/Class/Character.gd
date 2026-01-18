@@ -7,8 +7,8 @@ class_name Character
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var wait_spot: Marker2D = $"../wait_spot"
-var closest_tree = null
-var closest_crate = null
+var closest_tree: Object
+var closest_crate: Object
 var is_moving: bool = false
 var action_performed: bool = false
 var reached: bool = false

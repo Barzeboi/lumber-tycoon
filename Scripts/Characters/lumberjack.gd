@@ -3,6 +3,7 @@ extends Character
 var inventory_full: int = 10
 var inventory: Dictionary = {"Lumber": 0}
 var currentspeed
+var id
 
 var level: int = 1
 var base_cost: float = 900
@@ -175,6 +176,8 @@ func _find_closest_crate():
 	
 func _chop():
 	if closest_tree != null:
+		id = closest_tree.get_instance_id()
+		print(id)
 		action_performed = true
 		$ChopTimer.start()
 		
@@ -189,7 +192,7 @@ func _on_chop_timer_timeout() -> void:
 	if character_state != CharacterState.CHOP:
 		return
 	if closest_tree:
-		Events.emit_signal("chop", damage)
+		Events.emit_signal("chop", id, damage)
 	_change_state(CharacterState.IDLE)
 	
 func _tree_state():
