@@ -1,11 +1,13 @@
 extends Character
 
-var inventory_full = 10
+var inventory_full: int = 10
 var inventory: Dictionary = {"Lumber": 0}
 var currentspeed
-var level = 1
-var base_cost = 900
-@export var cost = 900
+
+var level: int = 1
+var base_cost: float = 900
+@export var cost: float = 900
+@export var damage: float = 1.0
 
 func _init() -> void:
 	Events.emit_signal("purchase", cost)
@@ -72,8 +74,6 @@ func _physics_process(delta: float) -> void:
 	if self.position.distance_to(target) <= 1:
 		_reached()
 
-# (10/26/25) Idk why, but removing the "is_moving" line in the "_reached" function
-# although outwardly redundant, causes the character to behave oddly while trying to stop
 func _reached():
 	return position.distance_to(target) < 1
 
@@ -177,7 +177,6 @@ func _chop():
 	if closest_tree != null:
 		action_performed = true
 		$ChopTimer.start()
-		closest_tree._chop()
 		
 func _carry():
 	pass
@@ -190,7 +189,7 @@ func _on_chop_timer_timeout() -> void:
 	if character_state != CharacterState.CHOP:
 		return
 	if closest_tree:
-		closest_tree._chop()
+		Events.emit_signal("chop", damage)
 	_change_state(CharacterState.IDLE)
 	
 func _tree_state():

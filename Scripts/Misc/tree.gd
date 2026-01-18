@@ -11,12 +11,13 @@ enum TreeState {
 	CHOPPING,
 	CHOPPED
 }
-@export var state: TreeState = TreeState.GROWN
+@export var state: TreeState
 @export var previous_state: TreeState
 var health = 8
 var full_health = 8
 var chopped = false
 var chopping = false
+var planted = false
 var watered = false
 @onready var lumber = materials.Lumber
 @onready var spawn_points = [$SpawnHolder/lumber_spawn.position, $SpawnHolder/lumber_spawn2.position, $SpawnHolder/lumber_spawn3.position, $SpawnHolder/lumber_spawn4.position, $SpawnHolder/lumber_spawn5.position]
@@ -24,26 +25,59 @@ var watered = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_tree_state()
-	statechanged.connect(_tree_state)
+	Events.connect("chop", _chop)
+	_change_state(TreeState.GROWN)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
+	match state:
+		TreeState.GROWN:
+			if chopping == true:
+				_change_state(TreeState.CHOPPING)
+		TreeState.CHOPPING:
+			if health >= 0:
+				_change_state(TreeState.CHOPPED)
+		TreeState.CHOPPED:
+			if planted == true:
+				_change_state(TreeState.PLANTED)
+		TreeState.PLANTED:
+			if watered == true:
+				_change_state(TreeState.GROWING)
+				
+func _exit_state(s:TreeState):
+	match s:
+		TreeState.CHOPPING:
+			chopping = false
+		TreeState.CHOPPED:
+			chopped = false
+
+func _enter_state(s:TreeState):
+	match s:
+		TreeState.GROWN:
+			health = full_health
+			add_to_group("Grown_Trees")
+			_animation_state(state)
+		TreeState.CHOPPING:
+			chopping = true
+			_animation_state(state)
+		TreeState.CHOPPED:
+			chopped = true
+			remove_from_group("Grown_Trees")
+			add_to_group("Chopped_Trees")
+			_spawn()
+			_animation_state(state)
+		TreeState.PLANTED:
+			remove_from_group("Chopped_Trees")
+			add_to_group("Planted_Trees")
+			_animation_state(state)
+		TreeState.GROWING:
+			$planted_timer.start()
+			_animation_state(state)
 	
-	
-	if chopped == true:
-		state = TreeState.CHOPPED
-		statechanged.emit()
-	
-	if chopping == true:
-		state = TreeState.CHOPPING
-		statechanged.emit()
-		#print(name + ": " + str(chopper))
-	
-func _chop():
-	health -= 1
+func _chop(damage: float):
+	health -= damage
 	chopping = true
 	
 func _planted():
@@ -59,48 +93,28 @@ func _change_state(new_state: TreeState):
 	_exit_state(state)
 	state = new_state
 	_enter_state(state)
-	
-	
-func _exit_state(state:TreeState):
-	match state:
-		TreeState.CHOPPING:
-			chopping = false
-		TreeState.CHOPPED:
-			chopped = false
-
-func _enter_state(state:TreeState):
-	match state:
-		TreeState.GROWN:
-			health = full_health
 
 func _spawn():
 	for positions in spawn_points:
 		var new_log = lumber.instantiate()
-		new_log.global_position = position
+		new_log.global_position = positions
 		owner.add_child(new_log)
 
-func _tree_state():
-	match state:
+func _animation_state(s:TreeState):
+	match s:
 		TreeState.PLANTED:
-			remove_from_group("Chopped_Trees")
-			add_to_group("Planted_Trees")
+			pass
 		TreeState.GROWN:
-			add_to_group("Grown_Trees")
 			$GrownSprite.visible = true
 			$ChoppedSprite.visible = false
 		TreeState.GROWING:
-			remove_from_group("Planted_Trees")
-			add_to_group("Growing_Trees")
+			pass
 		TreeState.CHOPPING:
 			pass
 		TreeState.CHOPPED:
-			remove_from_group("Grown_Trees")
-			add_to_group("Chopped_Trees")
 			$CollisionShape2D.disabled = true
 			$GrownSprite.visible = false
 			$ChoppedSprite.visible = true
-			_spawn()
-			done_chopping.emit()
 
 func _on_tree_area_body_entered(body: Node2D) -> void:
 	chopper = body
@@ -108,3 +122,7 @@ func _on_tree_area_body_entered(body: Node2D) -> void:
 func _on_tree_area_body_exited(body: Node2D) -> void:
 	await get_tree().process_frame
 	chopper = null
+
+
+func _on_planted_timer_timeout() -> void:
+	_change_state(TreeState.GROWN)

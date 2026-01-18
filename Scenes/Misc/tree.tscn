@@ -70,5 +70,8 @@ scale = Vector2(0.99999994, 0.99999994)
 position = Vector2(-7.2000003, 0)
 scale = Vector2(0.99999994, 0.99999994)
 
+[node name="planted_timer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="TreeArea" to="." method="_on_tree_area_body_entered"]
 [connection signal="body_exited" from="TreeArea" to="." method="_on_tree_area_body_exited"]
+[connection signal="timeout" from="planted_timer" to="." method="_on_planted_timer_timeout"]
