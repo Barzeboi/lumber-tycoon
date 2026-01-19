@@ -10,6 +10,21 @@ region = Rect2(783.41046, 176.029, 16.023743, 16.05951)
 [sub_resource type="CircleShape2D" id="CircleShape2D_3cymh"]
 radius = 8.0
 
+[sub_resource type="Animation" id="Animation_3cymh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_u57a3"]
 resource_name = "spawn"
 length = 0.6
@@ -27,21 +42,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(-2.5, -10), Vector2(-7.5, -25), Vector2(-15, -30), Vector2(-25, -25), Vector2(-27.5, -15), Vector2(-30, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_3cymh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mjgk4"]
 _data = {
 &"RESET": SubResource("Animation_3cymh"),
@@ -49,6 +49,8 @@ _data = {
 }
 
 [node name="Lumber" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
 script = ExtResource("1_u57a3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

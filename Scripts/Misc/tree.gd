@@ -20,7 +20,7 @@ var chopping = false
 var planted = false
 var watered = false
 @onready var lumber = materials.Lumber
-@onready var spawn_points = [$SpawnHolder/lumber_spawn.position, $SpawnHolder/lumber_spawn2.position, $SpawnHolder/lumber_spawn3.position, $SpawnHolder/lumber_spawn4.position, $SpawnHolder/lumber_spawn5.position]
+@onready var spawn_points = [$SpawnHolder/lumber_spawn, $SpawnHolder/lumber_spawn2, $SpawnHolder/lumber_spawn3, $SpawnHolder/lumber_spawn4, $SpawnHolder/lumber_spawn5]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -98,8 +98,8 @@ func _change_state(new_state: TreeState):
 func _spawn():
 	for positions in spawn_points:
 		var new_log = lumber.instantiate()
-		new_log.global_position = positions
 		owner.owner.add_child(new_log)
+		new_log.transform = positions.global_transform
 
 func _animation_state(s:TreeState):
 	match s:

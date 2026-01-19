@@ -19,7 +19,7 @@ enum CharacterState{
 	MOVE_TO_TREE,
 	MOVE_TO_CRATE,
 	MOVE_TO_SPOT,
-	RUN,
+	MOVE_TO_COLLECT,
 	CHOP,
 	CARRY,
 	COLLECT,

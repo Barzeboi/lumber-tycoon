@@ -10,6 +10,10 @@ var base_cost: float = 900
 @export var cost: float = 900
 @export var damage: float = 1.0
 
+var collectable_lumber: Array = []
+
+var closest_log: Object
+
 func _init() -> void:
 	Events.emit_signal("purchase", cost)
 
@@ -30,6 +34,9 @@ func _process(delta: float) -> void:
 					_find_closest_crate()
 				if closest_crate:
 					_change_state(CharacterState.MOVE_TO_CRATE)
+					
+			elif collectable_lumber.size() > 0:
+				_change_state(CharacterState.MOVE_TO_COLLECT)
 			
 			elif closest_tree == null:
 				_find_closest_tree()
@@ -49,6 +56,9 @@ func _process(delta: float) -> void:
 		CharacterState.MOVE_TO_CRATE:
 			if _reached():
 				_change_state(CharacterState.DROP)
+		CharacterState.MOVE_TO_COLLECT:
+			if _reached():
+				_change_state(CharacterState.COLLECT)
 				
 	
 	
@@ -103,10 +113,17 @@ func _enter_state(state: CharacterState):
 			target = closest_crate.global_position
 			_animation_state(character_state)
 			$CollisionShape2D.disabled = true
+		CharacterState.MOVE_TO_SPOT:
+			pass
+		CharacterState.MOVE_TO_COLLECT:
+			target = closest_log.global_position
+			_animation_state(character_state)
 		CharacterState.CHOP:
 			_chop()
 			_animation_state(character_state)
 			$ChopTimer.start()
+		CharacterState.COLLECT:
+			pass
 		CharacterState.DROP:
 			_drop()
 			_change_state(CharacterState.IDLE)
@@ -174,6 +191,17 @@ func _find_closest_crate():
 				closest_crate = crate
 	return closest_crate
 	
+func _find_closest_log():
+	var current_distance: float = 60
+	for logs in collectable_lumber:
+		if collectable_lumber.size() > 0:
+			var log_distance = global_position.distance_to(logs.global_position)
+			if log_distance < current_distance:
+				current_distance = log_distance
+				closest_log = logs
+	return closest_log
+			
+	
 func _chop():
 	if closest_tree != null:
 		id = closest_tree.get_instance_id()
@@ -202,3 +230,7 @@ func _tree_state():
 					_find_closest_tree()
 			closest_tree.TreeState.CHOPPED:
 				closest_tree = null
+
+func _on_collect_area_area_entered(area: Area2D) -> void:
+	collectable_lumber.append(area)
+	print(collectable_lumber)

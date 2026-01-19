@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://eb8ou0sifl71"]
+[gd_scene load_steps=36 format=3 uid="uid://eb8ou0sifl71"]
 
 [ext_resource type="Script" uid="uid://h0nd5nr1v2kl" path="res://Scripts/Characters/lumberjack.gd" id="1_bafrk"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="2_by02f"]
@@ -378,6 +378,9 @@ _data = {
 &"RUN": SubResource("Animation_v6ntj")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_geede"]
+radius = 19.999996
+
 [node name="Lumberjack" type="CharacterBody2D"]
 scale = Vector2(1.25, 1.25)
 collision_layer = 2
@@ -463,4 +466,13 @@ scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("5_v6ntj")
 hframes = 10
 
+[node name="Collect_Area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collect_Area"]
+position = Vector2(-12.8, -0.8)
+shape = SubResource("CircleShape2D_geede")
+
 [connection signal="timeout" from="ChopTimer" to="." method="_on_chop_timer_timeout"]
+[connection signal="area_entered" from="Collect_Area" to="." method="_on_collect_area_area_entered"]

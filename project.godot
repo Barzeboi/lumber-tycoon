@@ -51,6 +51,7 @@ Interact={
 2d_physics/layer_2="Characters"
 2d_physics/layer_3="Crates"
 2d_physics/layer_4="Trees"
+2d_physics/layer_5="Lumber"
 
 [rendering]
 
