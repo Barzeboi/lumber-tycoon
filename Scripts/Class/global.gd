@@ -4,6 +4,7 @@ extends Node
 @onready var planted_trees = get_tree().get_nodes_in_group("Planted_Trees")
 @onready var growing_trees = get_tree().get_nodes_in_group("Growing_Trees")
 @onready var chopped_trees = get_tree().get_nodes_in_group("Chopped_Trees")
+@onready var collectable_lumber = get_tree().get_nodes_in_group("Collectable_Lumber")
 @onready var crates = get_tree().get_nodes_in_group("Crates")
 var cash = 10000
 var contract

@@ -1,7 +1,7 @@
 extends Character
 
 var inventory_full: int = 10
-var inventory: Dictionary = {"Lumber": 0}
+@export var inventory: Dictionary = {"Lumber": 0}
 var currentspeed
 var id
 
@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 	#print(name)
 
 	$Label.text = str(inventory["Lumber"])
+	print(str(inventory["Lumber"]))
 	
 	match character_state:
 		CharacterState.IDLE:
@@ -36,7 +37,10 @@ func _process(delta: float) -> void:
 					_change_state(CharacterState.MOVE_TO_CRATE)
 					
 			elif collectable_lumber.size() > 0:
-				_change_state(CharacterState.MOVE_TO_COLLECT)
+				if !closest_log:
+					_find_closest_log()
+				else:
+					_change_state(CharacterState.MOVE_TO_COLLECT)
 			
 			elif closest_tree == null:
 				_find_closest_tree()
@@ -193,8 +197,8 @@ func _find_closest_crate():
 	
 func _find_closest_log():
 	var current_distance: float = 60
-	for logs in collectable_lumber:
-		if collectable_lumber.size() > 0:
+	for logs in Global.collectable_lumber:
+		if Global.collectable_lumber.size() > 0:
 			var log_distance = global_position.distance_to(logs.global_position)
 			if log_distance < current_distance:
 				current_distance = log_distance
