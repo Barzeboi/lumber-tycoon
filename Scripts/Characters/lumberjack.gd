@@ -16,6 +16,7 @@ var closest_log: Object
 
 func _init() -> void:
 	Events.emit_signal("purchase", cost)
+	Events.connect("collect", _collect)
 
 func _ready() -> void:
 	pass
@@ -37,7 +38,7 @@ func _process(delta: float) -> void:
 					_change_state(CharacterState.MOVE_TO_CRATE)
 					
 			elif collectable_lumber.size() > 0:
-				if !closest_log:
+				if closest_log == null:
 					_find_closest_log()
 				else:
 					_change_state(CharacterState.MOVE_TO_COLLECT)
@@ -197,8 +198,8 @@ func _find_closest_crate():
 	
 func _find_closest_log():
 	var current_distance: float = 60
-	for logs in Global.collectable_lumber:
-		if Global.collectable_lumber.size() > 0:
+	for logs in collectable_lumber:
+		if collectable_lumber.size() > 0:
 			var log_distance = global_position.distance_to(logs.global_position)
 			if log_distance < current_distance:
 				current_distance = log_distance
@@ -215,6 +216,10 @@ func _chop():
 		
 func _carry():
 	pass
+
+func _collect(area: Node2D):
+	inventory["Lumber"] += 1
+	collectable_lumber.erase(area)
 		
 func _drop():
 	closest_crate.store["Lumber"] += inventory["Lumber"]

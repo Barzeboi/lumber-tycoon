@@ -11,6 +11,6 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	print("touched")
-	body.inventory["Lumber"] += 1
-	remove_from_group("Collectable_Lumber")
+	Events.emit_signal("collect", self)
+	await get_tree().create_timer(0.5).timeout
 	queue_free()
