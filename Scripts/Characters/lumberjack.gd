@@ -25,9 +25,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	navigation_agent.target_position = target
 	#print(name)
-
+	
 	$Label.text = str(inventory["Lumber"])
-	print(str(inventory["Lumber"]))
+	#print(str(inventory["Lumber"]))
 	
 	match character_state:
 		CharacterState.IDLE:
@@ -63,13 +63,7 @@ func _process(delta: float) -> void:
 				_change_state(CharacterState.DROP)
 		CharacterState.MOVE_TO_COLLECT:
 			if _reached():
-				if closest_log != null:
-					_change_state(CharacterState.COLLECT)
-			if closest_log == null:
-				if collectable_lumber.size() > 0:
-						_find_closest_log()
-				else:
-						_change_state(CharacterState.IDLE)
+				_change_state(CharacterState.IDLE)
 		
 	
 	
@@ -203,7 +197,6 @@ func _find_closest_crate():
 	return closest_crate
 	
 func _find_closest_log():
-	print("called")
 	var current_distance: float = 60
 	for logs in collectable_lumber:
 		if collectable_lumber.size() > 0:
@@ -224,8 +217,8 @@ func _carry():
 	pass
 
 func _collect(area: Node2D):
+	print("collect")
 	inventory["Lumber"] += 1
-	collectable_lumber.push_back(area)
 	collectable_lumber.erase(area)
 		
 func _drop():
