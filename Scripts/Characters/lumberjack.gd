@@ -63,8 +63,14 @@ func _process(delta: float) -> void:
 				_change_state(CharacterState.DROP)
 		CharacterState.MOVE_TO_COLLECT:
 			if _reached():
-				_change_state(CharacterState.COLLECT)
-				
+				if closest_log != null:
+					_change_state(CharacterState.COLLECT)
+			if closest_log == null:
+				if collectable_lumber.size() > 0:
+						_find_closest_log()
+				else:
+						_change_state(CharacterState.IDLE)
+		
 	
 	
 	if target.x < global_position.x:
@@ -81,7 +87,7 @@ func _process(delta: float) -> void:
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	match character_state:
-		CharacterState.MOVE_TO_TREE, CharacterState.MOVE_TO_SPOT:
+		CharacterState.MOVE_TO_TREE, CharacterState.MOVE_TO_SPOT, CharacterState.MOVE_TO_COLLECT:
 			_move(target, 70)
 		CharacterState.MOVE_TO_CRATE:
 			_move(target, 50)
@@ -197,6 +203,7 @@ func _find_closest_crate():
 	return closest_crate
 	
 func _find_closest_log():
+	print("called")
 	var current_distance: float = 60
 	for logs in collectable_lumber:
 		if collectable_lumber.size() > 0:
@@ -210,7 +217,6 @@ func _find_closest_log():
 func _chop():
 	if closest_tree != null:
 		id = closest_tree.get_instance_id()
-		print(id)
 		action_performed = true
 		$ChopTimer.start()
 		
@@ -219,6 +225,7 @@ func _carry():
 
 func _collect(area: Node2D):
 	inventory["Lumber"] += 1
+	collectable_lumber.push_back(area)
 	collectable_lumber.erase(area)
 		
 func _drop():
@@ -242,4 +249,3 @@ func _tree_state():
 
 func _on_collect_area_area_entered(area: Area2D) -> void:
 	collectable_lumber.append(area)
-	print(collectable_lumber)

@@ -14,6 +14,8 @@ var action_performed: bool = false
 var reached: bool = false
 signal newly_purchased
 
+var Lumber: Object
+
 enum CharacterState{
 	IDLE,
 	MOVE_TO_TREE,

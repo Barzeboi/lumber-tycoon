@@ -25,6 +25,7 @@ script = ExtResource("1_88vw5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-20, 0)
 shape = SubResource("CircleShape2D_88vw5")
+disabled = true
 
 [node name="GrownSprite" type="Sprite2D" parent="."]
 visible = false
@@ -49,30 +50,26 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_f27wv")
 
 [node name="SpawnHolder" type="Node2D" parent="."]
+visible = false
 
 [node name="lumber_spawn" type="Marker2D" parent="SpawnHolder"]
-visible = false
 position = Vector2(-20, 15.199999)
 scale = Vector2(0.9999998, 0.9999998)
 
 [node name="lumber_spawn2" type="Marker2D" parent="SpawnHolder"]
-visible = false
-position = Vector2(-4.800003, 11.200005)
+position = Vector2(-12, 11.200001)
 scale = Vector2(0.99999976, 0.99999976)
 
 [node name="lumber_spawn3" type="Marker2D" parent="SpawnHolder"]
-visible = false
-position = Vector2(-4.8, -10.400001)
+position = Vector2(-12, -10.4)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="lumber_spawn4" type="Marker2D" parent="SpawnHolder"]
-visible = false
 position = Vector2(-20, -14.4)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="lumber_spawn5" type="Marker2D" parent="SpawnHolder"]
-visible = false
-position = Vector2(-7.2000003, 0)
+position = Vector2(-12, 0)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="planted_timer" type="Timer" parent="."]
