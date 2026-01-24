@@ -28,9 +28,11 @@ func _process(delta: float) -> void:
 	
 	$Label.text = str(inventory["Lumber"])
 	#print(str(inventory["Lumber"]))
+
 	
 	match character_state:
 		CharacterState.IDLE:
+			_check_for_logs()
 			if inventory["Lumber"] >= inventory_full:
 				if closest_crate == null:
 					_find_closest_crate()
@@ -64,6 +66,10 @@ func _process(delta: float) -> void:
 		CharacterState.MOVE_TO_COLLECT:
 			if _reached():
 				_change_state(CharacterState.IDLE)
+			
+	for index in collectable_lumber:
+		if index == null:
+			collectable_lumber.erase(index)
 		
 	
 	
@@ -80,10 +86,12 @@ func _process(delta: float) -> void:
 	
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
+	var direction = position.direction_to(Vector2(0,0))
+	velocity = speed * direction
 	match character_state:
-		CharacterState.MOVE_TO_TREE, CharacterState.MOVE_TO_SPOT, CharacterState.MOVE_TO_COLLECT:
+		CharacterState.MOVE_TO_TREE, CharacterState.MOVE_TO_SPOT:
 			_move(target, 70)
-		CharacterState.MOVE_TO_CRATE:
+		CharacterState.MOVE_TO_CRATE, CharacterState.MOVE_TO_COLLECT:
 			_move(target, 50)
 		_:
 			_move(global_position, 0)
@@ -200,13 +208,13 @@ func _find_closest_log():
 	var current_distance: float = 60
 	for logs in collectable_lumber:
 		if collectable_lumber.size() > 0:
-			var log_distance = global_position.distance_to(logs.global_position)
-			if log_distance < current_distance:
-				current_distance = log_distance
-				closest_log = logs
+			if logs != null:
+				var log_distance = global_position.distance_to(logs.global_position)
+				if log_distance < current_distance:
+					current_distance = log_distance
+					closest_log = logs
 	return closest_log
 			
-	
 func _chop():
 	if closest_tree != null:
 		id = closest_tree.get_instance_id()
@@ -216,9 +224,16 @@ func _chop():
 func _carry():
 	pass
 
-func _collect(area: Node2D):
+func _check_for_logs():
+	$Collect_Area/CollisionShape2D.disabled = false
+	await get_tree().create_timer(0.06).timeout
+	$Collect_Area/CollisionShape2D.disabled = true
+
+func _collect(id, area: Node2D):
+	var instanceid = get_instance_id()
 	print("collect")
-	inventory["Lumber"] += 1
+	if is_same(id, instanceid):
+		inventory["Lumber"] += 1
 	collectable_lumber.erase(area)
 		
 func _drop():

@@ -23,6 +23,7 @@ Events="*res://Scripts/Class/events.gd"
 [display]
 
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
