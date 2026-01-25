@@ -10,7 +10,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_body_entered(body: Node2D) -> void:
-	var id = body.get_instance_id()
-	Events.emit_signal("collect",id,self)
+	var lumb_id = body.get_instance_id()
+	Events.emit_signal("collect",lumb_id,self)
 	await get_tree().create_timer(0.3).timeout
 	queue_free()

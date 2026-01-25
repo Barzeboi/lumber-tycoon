@@ -86,16 +86,16 @@ func _enter_state(state: CharacterState):
 			_take()
 			_change_state(CharacterState.IDLE)
 		
-func _reached():
+func _reached() -> bool:
 	return position.distance_to(target) < 5
 	
 	
-func _take():
+func _take() -> void:
 	take_amount = randi() % inventory_full + 1
 	inventory["Seeds"] += take_amount
 	closest_crate.store["Seeds"] -= take_amount
 	
-func _plant():
+func _plant() -> void:
 	if closest_tree != null:
 		print("plant")
 		inventory["Seeds"] -= 1

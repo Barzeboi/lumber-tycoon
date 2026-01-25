@@ -45,7 +45,9 @@ func _init() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	print(reached)
+	_reached()
+	
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
@@ -59,3 +61,6 @@ func _move(target, speed: int):
 		is_moving = true
 	else:
 		is_moving = false
+		
+func _reached() -> bool:
+	return position.distance_to(target) < 1

@@ -82,6 +82,7 @@ func _chop(id, damage: float):
 		chopping = true
 	
 func _planted():
+	print_stack()
 	health = full_health
 	state = TreeState.PLANTED
 	chopped = false

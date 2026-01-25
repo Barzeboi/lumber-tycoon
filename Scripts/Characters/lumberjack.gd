@@ -70,8 +70,6 @@ func _process(delta: float) -> void:
 	for index in collectable_lumber:
 		if index == null:
 			collectable_lumber.erase(index)
-		
-	
 	
 	if target.x < global_position.x:
 		$Idle_Sprites.scale.x = -1.0
@@ -95,11 +93,6 @@ func _physics_process(delta: float) -> void:
 			_move(target, 50)
 		_:
 			_move(global_position, 0)
-	if self.position.distance_to(target) <= 1:
-		_reached()
-
-func _reached():
-	return position.distance_to(target) < 1
 
 func _change_state(new_state: CharacterState):
 	if character_state == new_state: return
@@ -127,7 +120,8 @@ func _enter_state(state: CharacterState):
 			_animation_state(character_state)
 			$CollisionShape2D.disabled = true
 		CharacterState.MOVE_TO_SPOT:
-			pass
+			target = wait_spot.global_position
+			_animation_state(character_state)
 		CharacterState.MOVE_TO_COLLECT:
 			target = closest_log.global_position
 			_animation_state(character_state)
@@ -149,7 +143,7 @@ func _animation_state(state:CharacterState):
 			$Carry_Sprites.hide()
 			$Chop_Sprites.hide()
 			animation_player.play("IDLE")
-		CharacterState.MOVE_TO_TREE:
+		CharacterState.MOVE_TO_TREE, CharacterState.MOVE_TO_SPOT, CharacterState.MOVE_TO_COLLECT:
 			$Run_sprites.show()
 			$Idle_Sprites.hide()
 			$Carry_Sprites.hide()
@@ -161,12 +155,6 @@ func _animation_state(state:CharacterState):
 			$Carry_Sprites.show()
 			$Chop_Sprites.hide()
 			animation_player.play("CARRY")
-		CharacterState.MOVE_TO_SPOT:
-			$Run_sprites.show()
-			$Idle_Sprites.hide()
-			$Carry_Sprites.hide()
-			$Chop_Sprites.hide()
-			animation_player.play("RUN")
 		CharacterState.CHOP:
 			$Run_sprites.hide()
 			$Idle_Sprites.hide()
@@ -229,10 +217,10 @@ func _check_for_logs():
 	await get_tree().create_timer(0.06).timeout
 	$Collect_Area/CollisionShape2D.disabled = true
 
-func _collect(id, area: Node2D):
+func _collect(lumb_id, area: Node2D):
 	var instanceid = get_instance_id()
 	print("collect")
-	if is_same(id, instanceid):
+	if is_same(lumb_id, instanceid):
 		inventory["Lumber"] += 1
 	collectable_lumber.erase(area)
 		
