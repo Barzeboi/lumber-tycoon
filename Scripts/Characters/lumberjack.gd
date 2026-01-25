@@ -57,7 +57,6 @@ func _process(delta: float) -> void:
 				_change_state(CharacterState.CHOP)
 		CharacterState.CHOP:
 			if closest_tree.health <= 0:
-				closest_tree._planted()
 				closest_tree = null
 				_change_state(CharacterState.IDLE)
 		CharacterState.MOVE_TO_CRATE:
