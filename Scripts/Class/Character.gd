@@ -63,4 +63,4 @@ func _move(target, speed: int):
 		is_moving = false
 		
 func _reached() -> bool:
-	return position.distance_to(target) < 1
+	return position.distance_to(target) <= 5

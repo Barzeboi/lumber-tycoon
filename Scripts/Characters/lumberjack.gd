@@ -10,7 +10,6 @@ var base_cost: float = 900
 @export var cost: float = 900
 @export var damage: float = 1.0
 
-var collectable_lumber: Array = []
 
 var closest_log: Object
 
@@ -28,7 +27,6 @@ func _process(delta: float) -> void:
 	
 	$Label.text = str(inventory["Lumber"])
 	#print(str(inventory["Lumber"]))
-
 	
 	match character_state:
 		CharacterState.IDLE:
@@ -38,8 +36,7 @@ func _process(delta: float) -> void:
 					_find_closest_crate()
 				if closest_crate:
 					_change_state(CharacterState.MOVE_TO_CRATE)
-					
-			elif collectable_lumber.size() > 0:
+			elif Global.collectable_lumber.size() > 0:
 				if closest_log == null:
 					_find_closest_log()
 				else:
@@ -50,7 +47,7 @@ func _process(delta: float) -> void:
 			elif closest_tree:
 				_change_state(CharacterState.MOVE_TO_TREE)
 			
-			else:
+			if Global.grown_trees.size() <= 0 and inventory["Lumber"] <= 0:
 				_change_state(CharacterState.MOVE_TO_SPOT)
 		CharacterState.MOVE_TO_TREE:
 			if _reached():
@@ -66,9 +63,9 @@ func _process(delta: float) -> void:
 			if _reached():
 				_change_state(CharacterState.IDLE)
 			
-	for index in collectable_lumber:
+	for index in Global.collectable_lumber:
 		if index == null:
-			collectable_lumber.erase(index)
+			Global.collectable_lumber.erase(index)
 	
 	if target.x < global_position.x:
 		$Idle_Sprites.scale.x = -1.0
@@ -162,7 +159,7 @@ func _animation_state(state:CharacterState):
 			animation_player.play("CHOP")
 	
 func _find_closest_tree():
-	var current_distance = 999999
+	var current_distance = INF
 	closest_tree = null
 	for tree in Global.grown_trees:
 		if Global.grown_trees.size() > 0:
@@ -192,9 +189,9 @@ func _find_closest_crate():
 	return closest_crate
 	
 func _find_closest_log():
-	var current_distance: float = 60
-	for logs in collectable_lumber:
-		if collectable_lumber.size() > 0:
+	var current_distance = INF
+	for logs in Global.collectable_lumber:
+		if Global.collectable_lumber.size() > 0:
 			if logs != null:
 				var log_distance = global_position.distance_to(logs.global_position)
 				if log_distance < current_distance:
@@ -221,7 +218,7 @@ func _collect(lumb_id, area: Node2D):
 	print("collect")
 	if is_same(lumb_id, instanceid):
 		inventory["Lumber"] += 1
-	collectable_lumber.erase(area)
+	Global.collectable_lumber.erase(area)
 		
 func _drop():
 	closest_crate.store["Lumber"] += inventory["Lumber"]
@@ -243,4 +240,4 @@ func _tree_state():
 				closest_tree = null
 
 func _on_collect_area_area_entered(area: Area2D) -> void:
-	collectable_lumber.append(area)
+	pass
