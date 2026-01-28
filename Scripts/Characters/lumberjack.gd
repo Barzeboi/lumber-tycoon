@@ -161,6 +161,7 @@ func _animation_state(state:CharacterState):
 func _find_closest_tree():
 	var current_distance = INF
 	closest_tree = null
+	
 	for tree in Global.grown_trees:
 		if Global.grown_trees.size() > 0:
 			if tree.state == tree.TreeState.CHOPPING:
@@ -173,7 +174,9 @@ func _find_closest_tree():
 			if tree_distance < current_distance:
 				current_distance = tree_distance
 				closest_tree = tree
-	return closest_tree
+				chop_score = current_distance / 4
+	
+	return [closest_tree, chop_score]
 	
 func _find_closest_crate():
 	var current_distance = 999999
@@ -197,7 +200,8 @@ func _find_closest_log():
 				if log_distance < current_distance:
 					current_distance = log_distance
 					closest_log = logs
-	return closest_log
+					collect_score = current_distance / 6
+	return [closest_log, collect_score]
 			
 func _chop():
 	if closest_tree != null:
@@ -239,5 +243,5 @@ func _tree_state():
 			closest_tree.TreeState.CHOPPED:
 				closest_tree = null
 
-func _on_collect_area_area_entered(area: Area2D) -> void:
+func _on_collect_area_area_entered(_area: Area2D) -> void:
 	pass

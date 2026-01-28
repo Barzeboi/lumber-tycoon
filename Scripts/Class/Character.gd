@@ -9,6 +9,9 @@ class_name Character
 @onready var wait_spot: Marker2D = $"../wait_spot"
 var closest_tree: Object
 var closest_crate: Object
+var chop_score: float
+var collect_score: float
+@onready var materials = Materials.new()
 var is_moving: bool = false
 var action_performed: bool = false
 var reached: bool = false
@@ -44,12 +47,12 @@ func _init() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	print(reached)
 	_reached()
-	
 
-func _physics_process(delta: float) -> void:
+
+func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 @warning_ignore("shadowed_variable")

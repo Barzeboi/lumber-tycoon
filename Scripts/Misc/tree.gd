@@ -121,7 +121,7 @@ func _animation_state(s:TreeState):
 func _on_tree_area_body_entered(body: Node2D) -> void:
 	chopper = body
 
-func _on_tree_area_body_exited(body: Node2D) -> void:
+func _on_tree_area_body_exited(_body: Node2D) -> void:
 	await get_tree().process_frame
 	chopper = null
 

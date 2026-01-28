@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name HUD
 
 var Tab_min: float = 565.0
 var Tab_max: float = 365.0
@@ -27,7 +28,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	mouse_pos = get_viewport().get_mouse_position()
 	if is_instance_valid(placer):
 		placer.position = mouse_pos
@@ -37,10 +38,10 @@ func _process(delta: float) -> void:
 			Selected_Purchaseable.LUMBERJACK:
 				_spawn(lumberjack)
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	pass
 
-func _on_tab_container_tab_clicked(tab: int) -> void:
+func _on_tab_container_tab_clicked(_tab: int) -> void:
 	$Control/TabContainer.position.y = Tab_max
 
 func _on_lumberjack_button_pressed() -> void:

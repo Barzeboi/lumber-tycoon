@@ -28,11 +28,11 @@ enum Purchased{
 var purchased: Purchased = Purchased.NONE
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Engine.time_scale = 2
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	grown_trees = get_tree().get_nodes_in_group("Grown_Trees")
 	growing_trees = get_tree().get_nodes_in_group("Growing_Trees")
 	planted_trees = get_tree().get_nodes_in_group("Planted_Trees")

@@ -73,5 +73,13 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
+[node name="Label" type="Label" parent="."]
+offset_left = 307.0
+offset_top = 7.0
+offset_right = 347.0
+offset_bottom = 62.0
+theme_override_font_sizes/font_size = 40
+text = "0"
+
 [connection signal="tab_clicked" from="Control/TabContainer" to="." method="_on_tab_container_tab_clicked"]
 [connection signal="pressed" from="Control/TabContainer/Characters/Button" to="." method="_on_lumberjack_button_pressed"]
