@@ -9,8 +9,6 @@ class_name Character
 @onready var wait_spot: Marker2D = $"../wait_spot"
 var closest_tree: Object
 var closest_crate: Object
-var chop_score: float
-var collect_score: float
 @onready var materials = Materials.new()
 var is_moving: bool = false
 var action_performed: bool = false

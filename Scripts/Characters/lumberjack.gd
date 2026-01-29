@@ -4,12 +4,13 @@ var inventory_full: int = 10
 @export var inventory: Dictionary = {"Lumber": 0}
 var currentspeed
 var id
-
 var level: int = 1
-var base_cost: float = 900
+var base_cost: float = 900.0
 @export var cost: float = 900
 @export var damage: float = 1.0
 
+@export var chop_score: float
+@export var collect_score: float
 
 var closest_log: Object
 
@@ -28,6 +29,7 @@ func _process(delta: float) -> void:
 	$Label.text = str(inventory["Lumber"])
 	#print(str(inventory["Lumber"]))
 	
+	
 	match character_state:
 		CharacterState.IDLE:
 			_check_for_logs()
@@ -38,13 +40,16 @@ func _process(delta: float) -> void:
 					_change_state(CharacterState.MOVE_TO_CRATE)
 			elif Global.collectable_lumber.size() > 0:
 				if closest_log == null:
+					collect_score = 0
 					_find_closest_log()
-				else:
+				elif closest_log != null and collect_score > chop_score:
 					_change_state(CharacterState.MOVE_TO_COLLECT)
 			
 			elif closest_tree == null:
+				chop_score = 0
 				_find_closest_tree()
-			elif closest_tree:
+			elif closest_tree != null and (chop_score > collect_score):
+				print("yes")
 				_change_state(CharacterState.MOVE_TO_TREE)
 			
 			if Global.grown_trees.size() <= 0 and inventory["Lumber"] <= 0:
@@ -91,6 +96,7 @@ func _physics_process(delta: float) -> void:
 			_move(global_position, 0)
 
 func _change_state(new_state: CharacterState):
+	print("change")
 	if character_state == new_state: return
 	$CollisionShape2D.disabled = false
 	_exit_state(character_state)
