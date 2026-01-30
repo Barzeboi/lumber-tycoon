@@ -51,8 +51,7 @@ func _on_lumberjack_button_pressed() -> void:
 		_delete_placement_visualizer()
 	_create_placement_visualizer(placer_texture)
 	currently_seletected = Selected_Purchaseable.LUMBERJACK
-	
-	
+
 
 func _create_placement_visualizer(visual: CompressedTexture2D):
 	placer = Sprite2D.new()
@@ -78,3 +77,11 @@ func _purchase(amount: float):
 	Global.cash -= amount
 	$Control/TextureRect/AvailableCash.text = "$" + str(Global.cash)
 	$Control/TextureRect/ProfDef.text = "$" + str(total_amount)
+
+func _on_planter_pressed() -> void:
+	$Control/TabContainer.position.y = Tab_min
+	$Control/TabContainer.current_tab = -1
+	if is_instance_valid(placer):
+		_delete_placement_visualizer()
+	_create_placement_visualizer(placer_texture)
+	currently_seletected = Selected_Purchaseable.LUMBERJACK
