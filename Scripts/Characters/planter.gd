@@ -3,10 +3,10 @@ extends Character
 var inventory: Dictionary = {"Seeds": 0}
 var take_amount: int
 var inventory_full = 10
+var cost: float = 650
 
 func _ready():
-	pass
-	
+	Events.emit_signal("purchase", cost)
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	navigation_agent.target_position = target
@@ -162,7 +162,7 @@ func _on_timer_timeout() -> void:
 	action_performed = false
 
 func _on_planting_timer_timeout() -> void:
+	var id = closest_tree.get_instance_id()
 	if closest_tree != null:
-		closest_tree._planted()
-		
+		Events.emit_signal("planted", id)
 		_change_state(CharacterState.WATER)

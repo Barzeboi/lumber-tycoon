@@ -26,7 +26,8 @@ var watered = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Events.connect("chop", _chop)
-	_change_state(TreeState.GROWN)
+	Events.connect("planted", _planted)
+	_change_state(TreeState.CHOPPED)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,6 +47,13 @@ func _process(delta: float) -> void:
 			if watered == true:
 				_change_state(TreeState.GROWING)
 				
+func _change_state(new_state: TreeState):
+	if state == new_state: return
+	previous_state = state
+	_exit_state(state)
+	state = new_state
+	_enter_state(state)
+	
 func _exit_state(s:TreeState):
 	match s:
 		TreeState.CHOPPING:
@@ -81,20 +89,14 @@ func _chop(id, damage: float):
 		health -= damage
 		chopping = true
 	
-func _planted():
-	print_stack()
-	health = full_health
-	state = TreeState.PLANTED
-	chopped = false
-	#print(name + ": " + str(state))
-	statechanged.emit()
-	
-func _change_state(new_state: TreeState):
-	if state == new_state: return
-	previous_state = state
-	_exit_state(state)
-	state = new_state
-	_enter_state(state)
+func _planted(id):
+	var instance_id = get_instance_id()
+	if is_same(id,instance_id):
+		health = full_health
+		planted = true
+		chopped = false
+		#print(name + ": " + str(state))
+		statechanged.emit()
 
 func _spawn():
 	for positions in spawn_points:

@@ -41,20 +41,16 @@ func _process(delta: float) -> void:
 			elif Global.collectable_lumber.size() > 0:
 				if closest_log == null:
 					collect_score = 0
-					print('!!')
 					_find_closest_log()
 				elif closest_log != null:
 					if collect_score < chop_score or chop_score == 0:
-						print("collect")
 						_change_state(CharacterState.MOVE_TO_COLLECT)
 			
 			elif closest_tree == null:
-				print('!!')
 				_find_closest_tree()
 				chop_score = 0
 			elif closest_tree != null:
 				if collect_score > chop_score or collect_score == 0:
-					print("chop")
 					_change_state(CharacterState.MOVE_TO_TREE)
 				
 			elif Global.grown_trees.size() <= 0 and inventory["Lumber"] != 0:
@@ -104,7 +100,6 @@ func _physics_process(delta: float) -> void:
 			_move(global_position, 0)
 
 func _change_state(new_state: CharacterState):
-	print("change")
 	if character_state == new_state: return
 	$CollisionShape2D.disabled = false
 	_exit_state(character_state)
@@ -238,7 +233,6 @@ func _check_for_logs():
 
 func _collect(lumb_id, area: Node2D):
 	var instanceid = get_instance_id()
-	print("collect")
 	if is_same(lumb_id, instanceid):
 		inventory["Lumber"] += 1
 	Global.collectable_lumber.erase(area)

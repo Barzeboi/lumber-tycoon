@@ -10,6 +10,7 @@ var previous_amount: float
 var total_amount: float
 var placer_texture: CompressedTexture2D = preload("res://Assets/Characters/base_idle_strip9.png")
 var lumberjack: PackedScene = preload("res://Scenes/Characters/lumberjack.tscn")
+var planter: PackedScene = preload('res://Scenes/Characters/planter.tscn')
 @onready var wait_spot: Marker2D = $"../wait_spot"
 
 enum Selected_Purchaseable {
@@ -37,6 +38,8 @@ func _process(_delta: float) -> void:
 		match currently_seletected:
 			Selected_Purchaseable.LUMBERJACK:
 				_spawn(lumberjack)
+			Selected_Purchaseable.PLANTER:
+				_spawn(planter)
 	
 func _physics_process(_delta: float) -> void:
 	pass
@@ -84,4 +87,4 @@ func _on_planter_pressed() -> void:
 	if is_instance_valid(placer):
 		_delete_placement_visualizer()
 	_create_placement_visualizer(placer_texture)
-	currently_seletected = Selected_Purchaseable.LUMBERJACK
+	currently_seletected = Selected_Purchaseable.PLANTER
