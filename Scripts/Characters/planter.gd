@@ -97,7 +97,6 @@ func _take() -> void:
 	
 func _plant() -> void:
 	if closest_tree != null:
-		print("plant")
 		inventory["Seeds"] -= 1
 		$planting_timer.start()
 		

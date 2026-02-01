@@ -1770,7 +1770,6 @@ tile_set = SubResource("TileSet_3rhlx")
 metadata/_edit_lock_ = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=768601485]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_yp2ti")
 metadata/_edit_lock_ = true
 

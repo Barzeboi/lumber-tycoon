@@ -76,6 +76,7 @@ func _enter_state(s:TreeState):
 			_spawn()
 			_animation_state(state)
 		TreeState.PLANTED:
+			print("planted")
 			remove_from_group("Chopped_Trees")
 			add_to_group("Planted_Trees")
 			_animation_state(state)
