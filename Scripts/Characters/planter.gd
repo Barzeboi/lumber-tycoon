@@ -36,6 +36,9 @@ func _process(delta: float) -> void:
 		CharacterState.MOVE_TO_SPOT:
 			if _reached():
 				_change_state(CharacterState.IDLE)
+		CharacterState.WATER:
+			if closest_tree.watered == true:
+				closest_tree = null
 	
 	_reached()
 @warning_ignore("unused_parameter")
@@ -101,7 +104,9 @@ func _plant() -> void:
 		$planting_timer.start()
 		
 func _water():
-	pass
+	if closest_tree != null:
+		var id = closest_tree.get_instance_id()
+		Events.emit_signal("watered", id)
 	
 func _find_closest_chopped_tree():
 	var current_distance = 999999

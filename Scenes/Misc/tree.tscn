@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbabnnpp53thk"]
+[gd_scene format=3 uid="uid://dbabnnpp53thk"]
 
 [ext_resource type="Script" uid="uid://bsf3bmmk4t62b" path="res://Scripts/Misc/tree.gd" id="1_88vw5"]
 [ext_resource type="Texture2D" uid="uid://gv0804cpg6pu" path="res://Assets/Tiles/spr_tileset_sunnysideworld_16px.png" id="1_bxoy8"]
@@ -16,63 +16,63 @@ region = Rect2(512.0364, 80.35245, 16.123291, 15.911552)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f27wv"]
 size = Vector2(9.599999, 9.599999)
 
-[node name="Tree" type="StaticBody2D"]
+[node name="Tree" type="StaticBody2D" unique_id=161696814]
 scale = Vector2(1.25, 1.25)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_88vw5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1653452142]
 position = Vector2(-20, 0)
 shape = SubResource("CircleShape2D_88vw5")
 disabled = true
 
-[node name="GrownSprite" type="Sprite2D" parent="."]
+[node name="GrownSprite" type="Sprite2D" parent="." unique_id=2143967833]
 visible = false
 position = Vector2(-20, -12)
 texture = SubResource("AtlasTexture_88vw5")
 
-[node name="ChoppedSprite" type="Sprite2D" parent="."]
+[node name="ChoppedSprite" type="Sprite2D" parent="." unique_id=1369987980]
 visible = false
 position = Vector2(-20, -0.5)
 scale = Vector2(0.7, 0.7)
 texture = SubResource("AtlasTexture_q8vuj")
 
-[node name="PlantedSprite" type="Sprite2D" parent="."]
+[node name="PlantedSprite" type="Sprite2D" parent="." unique_id=931655654]
 visible = false
 
-[node name="TreeArea" type="Area2D" parent="."]
+[node name="TreeArea" type="Area2D" parent="." unique_id=586037334]
 collision_layer = 8
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeArea" unique_id=904673783]
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_f27wv")
 
-[node name="SpawnHolder" type="Node2D" parent="."]
+[node name="SpawnHolder" type="Node2D" parent="." unique_id=1378809802]
 visible = false
 
-[node name="lumber_spawn" type="Marker2D" parent="SpawnHolder"]
+[node name="lumber_spawn" type="Marker2D" parent="SpawnHolder" unique_id=298512335]
 position = Vector2(-20, 15.199999)
 scale = Vector2(0.9999998, 0.9999998)
 
-[node name="lumber_spawn2" type="Marker2D" parent="SpawnHolder"]
+[node name="lumber_spawn2" type="Marker2D" parent="SpawnHolder" unique_id=674142939]
 position = Vector2(-12, 11.200001)
 scale = Vector2(0.99999976, 0.99999976)
 
-[node name="lumber_spawn3" type="Marker2D" parent="SpawnHolder"]
+[node name="lumber_spawn3" type="Marker2D" parent="SpawnHolder" unique_id=1839323052]
 position = Vector2(-12, -10.4)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="lumber_spawn4" type="Marker2D" parent="SpawnHolder"]
+[node name="lumber_spawn4" type="Marker2D" parent="SpawnHolder" unique_id=1390315218]
 position = Vector2(-20, -14.4)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="lumber_spawn5" type="Marker2D" parent="SpawnHolder"]
+[node name="lumber_spawn5" type="Marker2D" parent="SpawnHolder" unique_id=985966447]
 position = Vector2(-12, 0)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="planted_timer" type="Timer" parent="."]
+[node name="planted_timer" type="Timer" parent="." unique_id=184475945]
 
 [connection signal="body_entered" from="TreeArea" to="." method="_on_tree_area_body_entered"]
 [connection signal="body_exited" from="TreeArea" to="." method="_on_tree_area_body_exited"]
