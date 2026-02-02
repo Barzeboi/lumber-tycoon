@@ -71,10 +71,9 @@ icon = ExtResource("2_7lq3g")
 
 [node name="Planter" type="Button" parent="Control/TabContainer/Characters" unique_id=126475504]
 layout_mode = 0
-offset_left = 131.0
-offset_top = 1.0
-offset_right = 264.0
-offset_bottom = 197.0
+offset_left = 136.0
+offset_right = 269.0
+offset_bottom = 196.0
 icon = ExtResource("5_uauv8")
 
 [node name="Buildings" type="TabBar" parent="Control/TabContainer" unique_id=656875816]

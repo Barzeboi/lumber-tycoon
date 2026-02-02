@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 				_change_state(CharacterState.IDLE)
 		CharacterState.WATER:
 			if closest_tree.watered == true:
+				print("true")
 				closest_tree = null
 	
 	_reached()
