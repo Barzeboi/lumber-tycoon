@@ -37,6 +37,7 @@ func _process(delta: float) -> void:
 			if _reached():
 				_change_state(CharacterState.IDLE)
 		CharacterState.WATER:
+			print("water")
 			if closest_tree.watered == true:
 				print("true")
 				closest_tree = null
@@ -107,9 +108,11 @@ func _plant() -> void:
 func _water():
 	if closest_tree != null:
 		var id = closest_tree.get_instance_id()
-		Events.emit_signal("watered", id)
+		$watering_timer.start()
+		
 	
 func _find_closest_chopped_tree():
+	print("find")
 	var current_distance = 999999
 	if Global.chopped_trees.size() > 0:
 		for tree in Global.chopped_trees:
@@ -164,7 +167,8 @@ func _animation_state(state: CharacterState):
 			animation_player.play("WATERING")
 
 func _on_timer_timeout() -> void:
-	action_performed = false
+	var id = closest_tree.get_instance_id()
+	Events.emit_signal("watered", id)
 
 func _on_planting_timer_timeout() -> void:
 	var id = closest_tree.get_instance_id()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://l7qji6o80471"]
+[gd_scene format=3 uid="uid://l7qji6o80471"]
 
 [ext_resource type="Script" uid="uid://dui1tio6voylo" path="res://Scripts/Characters/planter.gd" id="1_b21ok"]
 [ext_resource type="Texture2D" uid="uid://c4jdjtj5eekiy" path="res://Assets/Characters/base_idle_strip9.png" id="1_o3l5m"]
@@ -316,89 +316,87 @@ _data = {
 &"WATERING": SubResource("Animation_kcwyw")
 }
 
-[node name="Planter" type="CharacterBody2D"]
+[node name="Planter" type="CharacterBody2D" unique_id=2113525000]
 scale = Vector2(1.25, 1.25)
 script = ExtResource("1_b21ok")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1341365313]
 shape = SubResource("CircleShape2D_o76xi")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_w4i3h")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1819656543]
+libraries/ = SubResource("AnimationLibrary_w4i3h")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1342266543]
 
-[node name="idle_sprites" type="Node2D" parent="."]
+[node name="idle_sprites" type="Node2D" parent="." unique_id=1400332188]
 texture_filter = 1
 
-[node name="idle_animation" type="Sprite2D" parent="idle_sprites"]
+[node name="idle_animation" type="Sprite2D" parent="idle_sprites" unique_id=267750597]
 texture = ExtResource("1_o3l5m")
 hframes = 9
 
-[node name="arm_animation" type="Sprite2D" parent="idle_sprites"]
+[node name="arm_animation" type="Sprite2D" parent="idle_sprites" unique_id=1190879607]
 texture = ExtResource("4_o76xi")
 hframes = 9
 
-[node name="hair_idle" type="Sprite2D" parent="idle_sprites"]
+[node name="hair_idle" type="Sprite2D" parent="idle_sprites" unique_id=1269350887]
 texture = ExtResource("7_o8h04")
 hframes = 9
 
-[node name="run_sprites" type="Node2D" parent="."]
+[node name="run_sprites" type="Node2D" parent="." unique_id=364903614]
 visible = false
 texture_filter = 1
 
-[node name="run_animation" type="Sprite2D" parent="run_sprites"]
+[node name="run_animation" type="Sprite2D" parent="run_sprites" unique_id=113101669]
 texture = ExtResource("2_a4vhm")
 hframes = 8
 
-[node name="run_arm_animation" type="Sprite2D" parent="run_sprites"]
+[node name="run_arm_animation" type="Sprite2D" parent="run_sprites" unique_id=437148966]
 position = Vector2(2, 2)
 texture = ExtResource("5_o76xi")
 hframes = 8
 
-[node name="hair_run" type="Sprite2D" parent="run_sprites"]
+[node name="hair_run" type="Sprite2D" parent="run_sprites" unique_id=724349205]
 texture = ExtResource("6_v0xmh")
 hframes = 8
 
-[node name="doing_sprites" type="Node2D" parent="."]
+[node name="doing_sprites" type="Node2D" parent="." unique_id=2132841165]
 visible = false
 texture_filter = 1
 
-[node name="doing_animation" type="Sprite2D" parent="doing_sprites"]
+[node name="doing_animation" type="Sprite2D" parent="doing_sprites" unique_id=2097089093]
 texture = ExtResource("3_o76xi")
 hframes = 8
 
-[node name="hair_doing" type="Sprite2D" parent="doing_sprites"]
+[node name="hair_doing" type="Sprite2D" parent="doing_sprites" unique_id=1156618981]
 texture = ExtResource("4_o8h04")
 hframes = 8
 
-[node name="doing_arm_animation" type="Sprite2D" parent="doing_sprites"]
+[node name="doing_arm_animation" type="Sprite2D" parent="doing_sprites" unique_id=1379632471]
 texture = ExtResource("7_8q8h8")
 hframes = 8
 
-[node name="watering_sprites" type="Node2D" parent="."]
+[node name="watering_sprites" type="Node2D" parent="." unique_id=1404506682]
 visible = false
 texture_filter = 1
 
-[node name="watering_animation" type="Sprite2D" parent="watering_sprites"]
+[node name="watering_animation" type="Sprite2D" parent="watering_sprites" unique_id=1257498022]
 texture = ExtResource("4_w4i3h")
 hframes = 5
 
-[node name="watering_arm_animation" type="Sprite2D" parent="watering_sprites"]
+[node name="watering_arm_animation" type="Sprite2D" parent="watering_sprites" unique_id=1055982012]
 texture = ExtResource("8_b21ok")
 hframes = 5
 
-[node name="hair_watering" type="Sprite2D" parent="watering_sprites"]
+[node name="hair_watering" type="Sprite2D" parent="watering_sprites" unique_id=391290527]
 texture = ExtResource("13_m65m8")
 hframes = 5
 
-[node name="watering_timer" type="Timer" parent="."]
+[node name="watering_timer" type="Timer" parent="." unique_id=890887899]
 wait_time = 1.2
 one_shot = true
 
-[node name="planting_timer" type="Timer" parent="."]
+[node name="planting_timer" type="Timer" parent="." unique_id=2142980422]
 wait_time = 1.2
 one_shot = true
 
