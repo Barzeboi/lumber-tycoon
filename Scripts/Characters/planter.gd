@@ -173,5 +173,6 @@ func _on_timer_timeout() -> void:
 func _on_planting_timer_timeout() -> void:
 	var id = closest_tree.get_instance_id()
 	if closest_tree != null:
+		print("water")
 		Events.emit_signal("planted", id)
 		_change_state(CharacterState.WATER)
