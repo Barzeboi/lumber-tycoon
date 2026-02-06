@@ -50,6 +50,9 @@ func _physics_process(delta: float) -> void:
 			_move(target, 70)
 		_:
 			_move(global_position, 0)
+
+func _reached() -> bool:
+	return position.distance_to(target) < 5
 			
 func _change_state(new_state:CharacterState):
 	if character_state == new_state: return
@@ -91,9 +94,32 @@ func _enter_state(state: CharacterState):
 			_take()
 			_change_state(CharacterState.IDLE)
 		
-func _reached() -> bool:
-	return position.distance_to(target) < 5
-	
+func _animation_state(state: CharacterState):
+	match state:
+		CharacterState.IDLE:
+			$idle_sprites.show()
+			$run_sprites.hide()
+			$doing_sprites.hide()
+			$watering_sprites.hide()
+			animation_player.play("IDLE")
+		CharacterState.MOVE_TO_TREE,CharacterState.MOVE_TO_CRATE, CharacterState.MOVE_TO_SPOT:
+			$run_sprites.show()
+			$idle_sprites.hide()
+			$doing_sprites.hide()
+			$watering_sprites.hide()
+			animation_player.play("RUN")
+		CharacterState.PLANT:
+			$doing_sprites.show()
+			$run_sprites.hide()
+			$idle_sprites.hide()
+			$watering_sprites.hide()
+			animation_player.play("DOING")
+		CharacterState.WATER:
+			$watering_sprites.show()
+			$run_sprites.hide()
+			$idle_sprites.hide()
+			$doing_sprites.hide()
+			animation_player.play("WATERING")
 	
 func _take() -> void:
 	take_amount = randi() % inventory_full + 1
@@ -138,33 +164,6 @@ func _find_closest_crate():
 				current_distance = crate_distance
 				closest_crate = crate
 	return closest_crate
-	
-func _animation_state(state: CharacterState):
-	match state:
-		CharacterState.IDLE:
-			$idle_sprites.show()
-			$run_sprites.hide()
-			$doing_sprites.hide()
-			$watering_sprites.hide()
-			animation_player.play("IDLE")
-		CharacterState.MOVE_TO_TREE,CharacterState.MOVE_TO_CRATE, CharacterState.MOVE_TO_SPOT:
-			$run_sprites.show()
-			$idle_sprites.hide()
-			$doing_sprites.hide()
-			$watering_sprites.hide()
-			animation_player.play("RUN")
-		CharacterState.PLANT:
-			$doing_sprites.show()
-			$run_sprites.hide()
-			$idle_sprites.hide()
-			$watering_sprites.hide()
-			animation_player.play("DOING")
-		CharacterState.WATER:
-			$watering_sprites.show()
-			$run_sprites.hide()
-			$idle_sprites.hide()
-			$doing_sprites.hide()
-			animation_player.play("WATERING")
 
 func _on_timer_timeout() -> void:
 	var id = closest_tree.get_instance_id()
