@@ -36,11 +36,6 @@ func _process(delta: float) -> void:
 		CharacterState.MOVE_TO_SPOT:
 			if _reached():
 				_change_state(CharacterState.IDLE)
-		CharacterState.WATER:
-			print("water")
-			if closest_tree.watered == true:
-				print("true")
-				closest_tree = null
 	
 	_reached()
 @warning_ignore("unused_parameter")
@@ -65,8 +60,6 @@ func _exit_state(state: CharacterState):
 	match state:
 		CharacterState.PLANT:
 			$planting_timer.stop()
-		CharacterState.WATER:
-			$watering_timer.stop()
 
 func _enter_state(state: CharacterState):
 	match state:
@@ -86,10 +79,6 @@ func _enter_state(state: CharacterState):
 			_plant()
 			$planting_timer.start()
 			_animation_state(character_state)
-		CharacterState.WATER:
-			_water()
-			_animation_state(character_state)
-			_change_state(CharacterState.IDLE)
 		CharacterState.TAKE:
 			_take()
 			_change_state(CharacterState.IDLE)
@@ -114,12 +103,6 @@ func _animation_state(state: CharacterState):
 			$idle_sprites.hide()
 			$watering_sprites.hide()
 			animation_player.play("DOING")
-		CharacterState.WATER:
-			$watering_sprites.show()
-			$run_sprites.hide()
-			$idle_sprites.hide()
-			$doing_sprites.hide()
-			animation_player.play("WATERING")
 	
 func _take() -> void:
 	take_amount = randi() % inventory_full + 1
@@ -165,13 +148,8 @@ func _find_closest_crate():
 				closest_crate = crate
 	return closest_crate
 
-func _on_timer_timeout() -> void:
-	var id = closest_tree.get_instance_id()
-	Events.emit_signal("watered", id)
-
 func _on_planting_timer_timeout() -> void:
 	var id = closest_tree.get_instance_id()
 	if closest_tree != null:
 		print("water")
 		Events.emit_signal("planted", id)
-		_change_state(CharacterState.WATER)

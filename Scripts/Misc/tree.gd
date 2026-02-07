@@ -27,7 +27,6 @@ var watered = false
 func _ready() -> void:
 	Events.connect("chop", _chop)
 	Events.connect("planted", _planted)
-	Events.connect("watered", _watered)
 	_change_state(TreeState.CHOPPED)
 
 
@@ -100,11 +99,6 @@ func _planted(id):
 		#print(name + ": " + str(state))
 		statechanged.emit()
 		
-func _watered(id):
-	var instance_id = get_instance_id()
-	if is_same(id, instance_id):
-		watered = true
-
 func _spawn():
 	for positions in spawn_points:
 		var new_log = lumber.instantiate()
