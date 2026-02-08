@@ -29,6 +29,7 @@ enum CharacterState{
 	DROP,
 	SUPPLY,
 	PLANT,
+	WATER,
 	TAKE
 }
 
