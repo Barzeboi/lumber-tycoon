@@ -5,6 +5,7 @@ var take_amount: int
 var inventory_full = 10
 var cost: float = 650
 
+
 func _ready():
 	Events.emit_signal("purchase", cost)
 @warning_ignore("unused_parameter")
@@ -135,7 +136,7 @@ func _water():
 	if closest_tree != null:
 		var id = closest_tree.get_instance_id()
 		$watering_timer.start()
-		
+		Events.emit_signal("watered", id)
 	
 func _find_closest_chopped_tree():
 	print("find")
@@ -143,6 +144,10 @@ func _find_closest_chopped_tree():
 	if Global.chopped_trees.size() > 0:
 		for tree in Global.chopped_trees:
 			if tree.state == tree.TreeState.PLANTED:
+				continue
+			if tree.state == tree.TreeState.GROWING:
+				continue
+			if tree.state == tree.TreeState.GROWN:
 				continue
 			var tree_distance = self.global_position.distance_to(tree.global_position)
 			if tree_distance < current_distance:
